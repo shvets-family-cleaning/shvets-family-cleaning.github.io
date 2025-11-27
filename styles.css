@@ -426,6 +426,29 @@ button {
     top: 16px;
 }
 
+/* On tablets, move lang selector to avoid overlap with nav-phone */
+@media (max-width: 1200px) and (min-width: 769px) {
+    .lang-selector {
+        right: 140px; /* Make room for nav-phone */
+    }
+}
+
+@media (max-width: 768px) {
+    .lang-selector {
+        top: 20px;
+        right: 70px; /* Move left of burger menu */
+    }
+    
+    .lang-selector.scrolled {
+        top: 14px;
+    }
+    
+    .lang-toggle {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+}
+
 .lang-toggle {
     display: flex;
     align-items: center;
@@ -3477,6 +3500,15 @@ textarea:focus-visible {
     
     .promo-code {
         justify-content: center;
+    }
+    
+    /* Fix nav-phone overlap with lang-selector */
+    .nav-phone {
+        padding: 8px 12px;
+    }
+    
+    .nav-phone span {
+        display: none;
     }
 }
 
