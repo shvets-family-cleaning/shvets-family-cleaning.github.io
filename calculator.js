@@ -1,29 +1,30 @@
 // ========================================
 // SHVETS PRO - Premium Price Calculator
 // Ultra-Premium Pricing for North Atlanta
+// Version 2.0 - Production Ready
 // ========================================
 
-// Premium Base Prices - North Atlanta Market (Higher-end)
+// Premium Base Prices - North Atlanta Luxury Market
 const basePrices = {
     standard: { 
-        base: 199,      // Base price for standard cleaning
-        bedroom: 35,    // Per bedroom
-        bathroom: 30    // Per bathroom
+        base: 219,      // Base price for standard cleaning
+        bedroom: 40,    // Per bedroom
+        bathroom: 35    // Per bathroom
     },
     deep: { 
-        base: 299,      // Deep cleaning base
-        bedroom: 50,    // Per bedroom  
-        bathroom: 45    // Per bathroom
+        base: 349,      // Deep cleaning base (luxury tier)
+        bedroom: 55,    // Per bedroom  
+        bathroom: 50    // Per bathroom
     },
     moveout: { 
-        base: 399,      // Move in/out base
-        bedroom: 60,    // Per bedroom
-        bathroom: 55    // Per bathroom
+        base: 449,      // Move in/out base (premium)
+        bedroom: 65,    // Per bedroom
+        bathroom: 60    // Per bathroom
     },
     airbnb: { 
-        base: 149,      // Airbnb turnover base (fast & efficient)
-        bedroom: 30,    // Per bedroom
-        bathroom: 25    // Per bathroom
+        base: 179,      // Airbnb turnover base
+        bedroom: 35,    // Per bedroom
+        bathroom: 30    // Per bathroom
     }
 };
 
@@ -38,7 +39,7 @@ const sqftMultipliers = {
     5000: 2.0       // 4,000+ sq ft
 };
 
-// Service names for display - All languages
+// Service names for display - All languages (UTF-8 encoded properly)
 const serviceNames = {
     en: {
         standard: 'Standard Cleaning',
@@ -63,6 +64,34 @@ const serviceNames = {
         deep: 'Limpieza Profunda',
         moveout: 'Limpieza de Mudanza',
         airbnb: 'Rotación Airbnb'
+    }
+};
+
+// Room labels for all languages
+const roomLabels = {
+    en: {
+        bedroom: 'Bedroom',
+        bedrooms: 'Bedrooms',
+        bathroom: 'Bathroom',
+        bathrooms: 'Bathrooms'
+    },
+    ru: {
+        bedroom: 'спальня',
+        bedrooms: 'спален',
+        bathroom: 'ванная',
+        bathrooms: 'ванных'
+    },
+    uk: {
+        bedroom: 'спальня',
+        bedrooms: 'спалень',
+        bathroom: 'ванна',
+        bathrooms: 'ванних'
+    },
+    es: {
+        bedroom: 'habitación',
+        bedrooms: 'habitaciones',
+        bathroom: 'baño',
+        bathrooms: 'baños'
     }
 };
 
@@ -105,6 +134,15 @@ function calculatePrice() {
     // Round to nearest $5
     price = Math.round(price / 5) * 5;
     
+    // Ensure minimum price
+    const minPrices = {
+        standard: 199,
+        deep: 349,
+        moveout: 449,
+        airbnb: 179
+    };
+    price = Math.max(price, minPrices[service]);
+    
     // Update display
     const priceDisplay = document.getElementById('estimatedPrice');
     if (priceDisplay) {
@@ -129,34 +167,40 @@ function animatePrice(element, targetPrice) {
     if (difference === 0) return;
     
     const duration = 400; // ms
-    const steps = 25;
-    const stepValue = difference / steps;
-    const stepDuration = duration / steps;
-    
-    let step = 0;
+    const startTime = performance.now();
     
     // Add pulse effect
     element.style.transform = 'scale(1.05)';
     element.style.color = '#C9A962';
     
-    const interval = setInterval(() => {
-        step++;
-        const newPrice = Math.round(currentPrice + (stepValue * step));
+    const animate = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Ease out cubic
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const newPrice = Math.round(currentPrice + (difference * easeOut));
+        
         element.textContent = newPrice;
         
-        if (step >= steps) {
-            clearInterval(interval);
+        if (progress < 1) {
+            requestAnimationFrame(animate);
+        } else {
             element.textContent = targetPrice;
             element.style.transform = 'scale(1)';
             element.style.color = '';
         }
-    }, stepDuration);
+    };
+    
+    requestAnimationFrame(animate);
 }
 
 // Number input controls
 function setupNumberInputs() {
     document.querySelectorAll('.num-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent form submission
+            
             const targetId = this.getAttribute('data-target');
             const input = document.getElementById(targetId);
             if (!input) return;
@@ -214,7 +258,7 @@ function setupCalculator() {
     setupNumberInputs();
     
     // Initial calculation
-    calculatePrice();
+    setTimeout(calculatePrice, 100);
 }
 
 // Get booking summary
@@ -222,26 +266,11 @@ function getBookingSummary() {
     const data = calculatePrice();
     const lang = localStorage.getItem('shvets-lang') || 'en';
     const names = serviceNames[lang] || serviceNames.en;
+    const labels = roomLabels[lang] || roomLabels.en;
     
-    let bedroomText, bathroomText;
-    
-    switch(lang) {
-        case 'ru':
-            bedroomText = 'спален';
-            bathroomText = 'ванных';
-            break;
-        case 'uk':
-            bedroomText = 'спалень';
-            bathroomText = 'ванних';
-            break;
-        case 'es':
-            bedroomText = 'habitaciones';
-            bathroomText = 'baños';
-            break;
-        default:
-            bedroomText = 'Bedrooms';
-            bathroomText = 'Bathrooms';
-    }
+    // Determine singular/plural
+    const bedroomText = data.bedrooms === 1 ? labels.bedroom : labels.bedrooms;
+    const bathroomText = data.bathrooms === 1 ? labels.bathroom : labels.bathrooms;
     
     return {
         serviceName: names[data.service],
@@ -407,4 +436,8 @@ SHVETS PRO - Premium Cleaning`;
 }
 
 // Initialize calculator when DOM is ready
-document.addEventListener('DOMContentLoaded', setupCalculator);
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupCalculator);
+} else {
+    setupCalculator();
+}

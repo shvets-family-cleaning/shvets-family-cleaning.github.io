@@ -3,26 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SHVETS PRO - Ultra-Premium Residential Cleaning in North Atlanta. Serving Alpharetta, Woodstock, Cumming, Johns Creek, Marietta, Sugar Hill, Buford. White-glove service for luxury homes. Instant quotes & same-day booking.">
-    <meta name="keywords" content="luxury cleaning Atlanta, premium house cleaning Alpharetta, deep cleaning Woodstock, Airbnb cleaning Georgia, move out cleaning Cumming, elite cleaning Johns Creek, house cleaning Roswell, maid service Milton">
+    <meta name="description" content="SHVETS PRO - Premium Residential Cleaning in North Atlanta. Serving Alpharetta, Woodstock, Cumming, Johns Creek, Marietta, Sugar Hill, Buford. White-glove service for luxury homes. Instant quotes & same-day booking. Family-owned, fully insured.">
+    <meta name="keywords" content="luxury cleaning Atlanta, premium house cleaning Alpharetta, deep cleaning Woodstock, Airbnb cleaning Georgia, move out cleaning Cumming, elite cleaning Johns Creek, house cleaning Roswell, maid service Milton, professional cleaning service, licensed and insured cleaning">
     <meta name="author" content="Shvets Family LLC">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#0D0D0D">
+    <meta name="geo.region" content="US-GA">
+    <meta name="geo.placename" content="Alpharetta">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://shvetspro.com/">
-    <meta property="og:title" content="SHVETS PRO | Ultra-Premium Cleaning in North Atlanta">
-    <meta property="og:description" content="White-glove residential cleaning for discerning homeowners. Instant quotes, same-day booking. Family-owned excellence since 2020.">
+    <meta property="og:title" content="SHVETS PRO | Premium Cleaning in North Atlanta">
+    <meta property="og:description" content="White-glove residential cleaning for discerning homeowners. Instant quotes, same-day booking. Family-owned excellence.">
     <meta property="og:image" content="https://shvetspro.com/og-image.jpg">
+    <meta property="og:locale" content="en_US">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://shvetspro.com/">
-    <meta property="twitter:title" content="SHVETS PRO | Ultra-Premium Cleaning">
+    <meta property="twitter:title" content="SHVETS PRO | Premium Cleaning">
     <meta property="twitter:description" content="White-glove residential cleaning for discerning homeowners. North Atlanta's premier cleaning service.">
     
-    <title>SHVETS PRO | Premium Residential Cleaning | North Atlanta</title>
+    <title>SHVETS PRO | Premium Residential Cleaning | Alpharetta, Woodstock, Johns Creek GA</title>
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://shvetspro.com/">
     
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,6 +45,92 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Schema.org Structured Data for Local Business -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://shvetspro.com",
+        "name": "SHVETS PRO - Premium Cleaning",
+        "alternateName": "Shvets Family LLC",
+        "description": "Premium residential cleaning services in North Atlanta. White-glove cleaning for discerning homeowners.",
+        "url": "https://shvetspro.com",
+        "telephone": "+1-678-937-6215",
+        "email": "shvetspro@gmail.com",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Alpharetta",
+            "addressRegion": "GA",
+            "postalCode": "30004",
+            "addressCountry": "US"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 34.0754,
+            "longitude": -84.2941
+        },
+        "areaServed": [
+            {"@type": "City", "name": "Alpharetta"},
+            {"@type": "City", "name": "Woodstock"},
+            {"@type": "City", "name": "Cumming"},
+            {"@type": "City", "name": "Johns Creek"},
+            {"@type": "City", "name": "Marietta"},
+            {"@type": "City", "name": "Roswell"},
+            {"@type": "City", "name": "Milton"},
+            {"@type": "City", "name": "Sandy Springs"}
+        ],
+        "priceRange": "$199-$599",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "08:00",
+            "closes": "18:00"
+        },
+        "sameAs": [
+            "https://facebook.com/shvetscleaning",
+            "https://instagram.com/shvetscleaning"
+        ],
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Cleaning Services",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Standard Cleaning",
+                        "description": "Regular maintenance cleaning for homes"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Deep Cleaning",
+                        "description": "Comprehensive top-to-bottom cleaning"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Move In/Out Cleaning",
+                        "description": "Complete cleaning for property transitions"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Airbnb Turnover",
+                        "description": "Quick turnovers for short-term rentals"
+                    }
+                }
+            ]
+        }
+    }
+    </script>
 </head>
 <body>
     <!-- ====== LUXURY PRELOADER ====== -->
@@ -114,7 +206,7 @@
             </ul>
             
             <div class="nav-actions">
-                <a href="tel:+16789376215" class="nav-phone">
+                <a href="tel:+16789376215" class="nav-phone" onclick="event.stopPropagation();">
                     <i class="fas fa-phone-alt"></i>
                     <span>(678) 937-6215</span>
                 </a>
@@ -154,7 +246,7 @@
                 <div class="badge-icon">
                     <i class="fas fa-award"></i>
                 </div>
-                <span data-i18n="hero.badge">North Atlanta's #1 Premium Cleaning Service</span>
+                <span data-i18n="hero.badge">North Atlanta's Premium Cleaning Service</span>
                 <div class="badge-stars">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -194,25 +286,25 @@
                     <span data-i18n="hero.cta1">Calculate Your Price</span>
                     <i class="fas fa-calculator"></i>
                 </a>
-                <a href="https://wa.me/16789376215?text=Hi!%20I'd%20like%20to%20get%20a%20quote%20for%20cleaning%20services." class="btn btn-outline btn-xl" target="_blank">
+                <a href="https://wa.me/16789376215?text=Hi!%20I'd%20like%20to%20get%20a%20quote%20for%20cleaning%20services." class="btn btn-outline btn-xl" target="_blank" rel="noopener">
                     <i class="fab fa-whatsapp"></i>
                     <span data-i18n="hero.cta2">WhatsApp Us</span>
                 </a>
             </div>
             
             <div class="hero-trust animate-reveal delay-6">
-                <div class="trust-avatars">
-                    <div class="avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">M</div>
-                    <div class="avatar" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">S</div>
-                    <div class="avatar" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">K</div>
-                    <div class="avatar" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">J</div>
-                    <div class="avatar avatar-more">+500</div>
-                </div>
-                <div class="trust-text">
-                    <span class="trust-count" data-i18n="hero.trust">500+ Families Trust Us</span>
-                    <div class="trust-rating">
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Fully Insured</span>
+                    </div>
+                    <div class="trust-badge">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Licensed LLC</span>
+                    </div>
+                    <div class="trust-badge">
                         <i class="fas fa-star"></i>
-                        <span>4.9</span>
+                        <span>5-Star Rated</span>
                     </div>
                 </div>
             </div>
@@ -234,29 +326,23 @@
                     <div class="stat-icon">
                         <i class="fas fa-home"></i>
                     </div>
-                    <div class="stat-number" data-count="2500">0</div>
+                    <div class="stat-number" data-count="150">0</div>
+                    <div class="stat-suffix">+</div>
                     <div class="stat-label" data-i18n="stats.homes">Homes Cleaned</div>
-                    <div class="stat-trend">
-                        <i class="fas fa-arrow-up"></i>
-                        <span>+180 this month</span>
-                    </div>
                 </div>
                 <div class="stat-card animate-reveal delay-1">
                     <div class="stat-icon">
                         <i class="fas fa-heart"></i>
                     </div>
-                    <div class="stat-number" data-count="500">0</div>
+                    <div class="stat-number" data-count="50">0</div>
+                    <div class="stat-suffix">+</div>
                     <div class="stat-label" data-i18n="stats.clients">Happy Clients</div>
-                    <div class="stat-trend">
-                        <i class="fas fa-arrow-up"></i>
-                        <span>+45 this month</span>
-                    </div>
                 </div>
                 <div class="stat-card animate-reveal delay-2">
                     <div class="stat-icon">
                         <i class="fas fa-star"></i>
                     </div>
-                    <div class="stat-number" data-count="49" data-decimal="true">0</div>
+                    <div class="stat-number" data-count="50" data-decimal="true">0</div>
                     <div class="stat-label" data-i18n="stats.rating">Google Rating</div>
                     <div class="stat-stars">
                         <i class="fas fa-star"></i>
@@ -327,7 +413,7 @@
                     </ul>
                     <div class="service-price">
                         <span class="price-from" data-i18n="services.from">Starting at</span>
-                        <span class="price-amount">$299</span>
+                        <span class="price-amount">$349</span>
                     </div>
                     <a href="#calculator" class="btn btn-gold btn-block" data-i18n="services.book">Get Quote</a>
                 </div>
@@ -348,7 +434,7 @@
                     </ul>
                     <div class="service-price">
                         <span class="price-from" data-i18n="services.from">Starting at</span>
-                        <span class="price-amount">$399</span>
+                        <span class="price-amount">$449</span>
                     </div>
                     <a href="#calculator" class="btn btn-dark btn-block" data-i18n="services.book">Get Quote</a>
                 </div>
@@ -369,7 +455,7 @@
                     </ul>
                     <div class="service-price">
                         <span class="price-from" data-i18n="services.from">Starting at</span>
-                        <span class="price-amount">$149</span>
+                        <span class="price-amount">$179</span>
                     </div>
                     <a href="#calculator" class="btn btn-dark btn-block" data-i18n="services.book">Get Quote</a>
                 </div>
@@ -419,11 +505,11 @@
                     <div class="calc-contact">
                         <p data-i18n="calc.prefer">Prefer to talk?</p>
                         <div class="contact-buttons">
-                            <a href="tel:+16789376215" class="btn btn-outline">
+                            <a href="tel:+16789376215" class="btn btn-outline" onclick="event.stopPropagation();">
                                 <i class="fas fa-phone-alt"></i>
                                 <span>(678) 937-6215</span>
                             </a>
-                            <a href="https://wa.me/16789376215" class="btn btn-whatsapp" target="_blank">
+                            <a href="https://wa.me/16789376215" class="btn btn-whatsapp" target="_blank" rel="noopener">
                                 <i class="fab fa-whatsapp"></i>
                                 <span>WhatsApp</span>
                             </a>
@@ -479,17 +565,17 @@
                                 <div class="detail-item">
                                     <span class="detail-label" data-i18n="calc.bedrooms">Bedrooms</span>
                                     <div class="number-input">
-                                        <button class="num-btn minus" data-target="bedrooms"><i class="fas fa-minus"></i></button>
+                                        <button type="button" class="num-btn minus" data-target="bedrooms"><i class="fas fa-minus"></i></button>
                                         <input type="number" id="bedrooms" value="3" min="1" max="10" readonly>
-                                        <button class="num-btn plus" data-target="bedrooms"><i class="fas fa-plus"></i></button>
+                                        <button type="button" class="num-btn plus" data-target="bedrooms"><i class="fas fa-plus"></i></button>
                                     </div>
                                 </div>
                                 <div class="detail-item">
                                     <span class="detail-label" data-i18n="calc.bathrooms">Bathrooms</span>
                                     <div class="number-input">
-                                        <button class="num-btn minus" data-target="bathrooms"><i class="fas fa-minus"></i></button>
+                                        <button type="button" class="num-btn minus" data-target="bathrooms"><i class="fas fa-minus"></i></button>
                                         <input type="number" id="bathrooms" value="2" min="1" max="10" readonly>
-                                        <button class="num-btn plus" data-target="bathrooms"><i class="fas fa-plus"></i></button>
+                                        <button type="button" class="num-btn plus" data-target="bathrooms"><i class="fas fa-plus"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -572,12 +658,12 @@
                             <div class="result-label" data-i18n="calc.total">Your Estimated Price</div>
                             <div class="result-price">
                                 <span class="price-currency">$</span>
-                                <span class="price-value" id="estimatedPrice">299</span>
+                                <span class="price-value" id="estimatedPrice">349</span>
                             </div>
                             <div class="result-note" data-i18n="calc.note">Final price confirmed after booking</div>
                         </div>
                         
-                        <button class="btn btn-gold btn-block btn-xl" id="bookNowBtn" data-i18n="calc.book">
+                        <button type="button" class="btn btn-gold btn-block btn-xl" id="bookNowBtn" data-i18n="calc.book">
                             Book Now
                         </button>
                     </div>
@@ -603,7 +689,8 @@
                             style="border:0;" 
                             allowfullscreen="" 
                             loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade">
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="SHVETS PRO Service Area Map">
                         </iframe>
                     </div>
                 </div>
@@ -641,7 +728,7 @@
                     
                     <div class="areas-cta">
                         <p data-i18n="areas.question">Not sure if we service your area?</p>
-                        <a href="tel:+16789376215" class="btn btn-gold">
+                        <a href="tel:+16789376215" class="btn btn-gold" onclick="event.stopPropagation();">
                             <i class="fas fa-phone-alt"></i>
                             <span data-i18n="areas.call">Call to Check</span>
                         </a>
@@ -665,7 +752,7 @@
                             </div>
                         </div>
                         <div class="image-badge">
-                            <span class="badge-number">5+</span>
+                            <span class="badge-number">2+</span>
                             <span class="badge-text" data-i18n="about.badge">Years of Excellence</span>
                         </div>
                     </div>
@@ -699,6 +786,24 @@
                         </div>
                     </div>
                     
+                    <!-- Trust Credentials -->
+                    <div class="trust-credentials">
+                        <div class="credential">
+                            <i class="fas fa-building"></i>
+                            <div class="credential-info">
+                                <span class="credential-title">Shvets Family LLC</span>
+                                <span class="credential-text">Registered Business in Georgia</span>
+                            </div>
+                        </div>
+                        <div class="credential">
+                            <i class="fas fa-file-contract"></i>
+                            <div class="credential-info">
+                                <span class="credential-title">General Liability Insurance</span>
+                                <span class="credential-text">$1M Coverage</span>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="about-signature">
                         <div class="signature-text">
                             <span class="signature-name">Mila & Serhii Shvets</span>
@@ -724,8 +829,8 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <span class="rating-score">4.9</span>
-                    <span class="rating-count" data-i18n="reviews.based">based on 120+ reviews</span>
+                    <span class="rating-score">5.0</span>
+                    <span class="rating-count" data-i18n="reviews.based">based on Google Reviews</span>
                 </div>
             </div>
             
@@ -750,7 +855,7 @@
                         <p class="review-text">"Absolutely incredible service! Mila and her team transformed my home. Every corner sparkles, and they were so professional and friendly. Highly recommend SHVETS PRO to anyone looking for premium cleaning!"</p>
                         <div class="review-footer">
                             <span class="review-source"><i class="fab fa-google"></i> Google Review</span>
-                            <span class="review-date">2 weeks ago</span>
+                            <span class="review-verified"><i class="fas fa-check-circle"></i> Verified</span>
                         </div>
                     </div>
                     
@@ -773,7 +878,7 @@
                         <p class="review-text">"We've used many cleaning services over the years, but SHVETS PRO is by far the best. The attention to detail is unmatched. Our home has never been cleaner. Worth every penny!"</p>
                         <div class="review-footer">
                             <span class="review-source"><i class="fab fa-google"></i> Google Review</span>
-                            <span class="review-date">1 month ago</span>
+                            <span class="review-verified"><i class="fas fa-check-circle"></i> Verified</span>
                         </div>
                     </div>
                     
@@ -795,8 +900,8 @@
                         </div>
                         <p class="review-text">"I hired SHVETS PRO for a move-out cleaning, and I was blown away. They got every nook and cranny. My landlord said it was the cleanest he'd ever seen an apartment. 10/10!"</p>
                         <div class="review-footer">
-                            <span class="review-source"><i class="fab fa-facebook"></i> Facebook Review</span>
-                            <span class="review-date">3 weeks ago</span>
+                            <span class="review-source"><i class="fab fa-google"></i> Google Review</span>
+                            <span class="review-verified"><i class="fas fa-check-circle"></i> Verified</span>
                         </div>
                     </div>
                     
@@ -819,7 +924,7 @@
                         <p class="review-text">"As an Airbnb host, I need reliable turnovers. SHVETS PRO never disappoints. Fast, thorough, and my guests always comment on how clean the place is. 5-star service!"</p>
                         <div class="review-footer">
                             <span class="review-source"><i class="fab fa-google"></i> Google Review</span>
-                            <span class="review-date">1 week ago</span>
+                            <span class="review-verified"><i class="fas fa-check-circle"></i> Verified</span>
                         </div>
                     </div>
                     
@@ -842,7 +947,7 @@
                         <p class="review-text">"Mila is amazing! She pays attention to every detail and treats my home with such care. The deep cleaning service is thorough and the pricing is transparent. Love this team!"</p>
                         <div class="review-footer">
                             <span class="review-source"><i class="fab fa-google"></i> Google Review</span>
-                            <span class="review-date">2 months ago</span>
+                            <span class="review-verified"><i class="fas fa-check-circle"></i> Verified</span>
                         </div>
                     </div>
                     
@@ -862,29 +967,25 @@
                                 <i class="fas fa-star"></i>
                             </div>
                         </div>
-                        <p class="review-text">"Professional, punctual, and perfect results. We've been using SHVETS PRO for our bi-weekly cleaning for 6 months now. Couldn't be happier with the service and the team."</p>
+                        <p class="review-text">"Professional, punctual, and perfect results. We've been using SHVETS PRO for our bi-weekly cleaning. Couldn't be happier with the service and the team."</p>
                         <div class="review-footer">
-                            <span class="review-source"><i class="fab fa-facebook"></i> Facebook Review</span>
-                            <span class="review-date">1 month ago</span>
+                            <span class="review-source"><i class="fab fa-google"></i> Google Review</span>
+                            <span class="review-verified"><i class="fas fa-check-circle"></i> Verified</span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="slider-controls">
-                    <button class="slider-btn prev" id="prevReview"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slider-btn prev" id="prevReview" aria-label="Previous review"><i class="fas fa-chevron-left"></i></button>
                     <div class="slider-dots" id="sliderDots"></div>
-                    <button class="slider-btn next" id="nextReview"><i class="fas fa-chevron-right"></i></button>
+                    <button class="slider-btn next" id="nextReview" aria-label="Next review"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
             
             <div class="reviews-cta animate-reveal">
-                <a href="https://g.page/r/YOUR_GOOGLE_REVIEW_LINK/review" class="btn btn-outline" target="_blank">
+                <a href="https://www.google.com/search?q=shvets+pro+cleaning+alpharetta+reviews" class="btn btn-outline" target="_blank" rel="noopener">
                     <i class="fab fa-google"></i>
                     <span data-i18n="reviews.google">See Google Reviews</span>
-                </a>
-                <a href="https://facebook.com/shvetscleaning/reviews" class="btn btn-outline" target="_blank">
-                    <i class="fab fa-facebook"></i>
-                    <span data-i18n="reviews.facebook">See Facebook Reviews</span>
                 </a>
             </div>
         </div>
@@ -906,7 +1007,7 @@
                             </div>
                             <div class="method-content">
                                 <span class="method-label" data-i18n="contact.phone">Call or Text</span>
-                                <a href="tel:+16789376215" class="method-value">(678) 937-6215</a>
+                                <a href="tel:+16789376215" class="method-value" onclick="event.stopPropagation();">(678) 937-6215</a>
                             </div>
                         </div>
                         
@@ -916,21 +1017,21 @@
                             </div>
                             <div class="method-content">
                                 <span class="method-label" data-i18n="contact.email">Email Us</span>
-                                <a href="mailto:e79e79@gmail.com" class="method-value">e79e79@gmail.com</a>
+                                <a href="mailto:shvetspro@gmail.com" class="method-value">shvetspro@gmail.com</a>
                             </div>
                         </div>
                     </div>
                     
                     <div class="messenger-buttons">
-                        <a href="https://wa.me/16789376215?text=Hi!%20I'd%20like%20to%20get%20a%20quote%20for%20cleaning%20services." class="messenger-btn whatsapp" target="_blank">
+                        <a href="https://wa.me/16789376215?text=Hi!%20I'd%20like%20to%20get%20a%20quote%20for%20cleaning%20services." class="messenger-btn whatsapp" target="_blank" rel="noopener">
                             <i class="fab fa-whatsapp"></i>
                             <span>WhatsApp</span>
                         </a>
-                        <a href="https://t.me/+16789376215" class="messenger-btn telegram" target="_blank">
+                        <a href="https://t.me/+16789376215" class="messenger-btn telegram" target="_blank" rel="noopener">
                             <i class="fab fa-telegram-plane"></i>
                             <span>Telegram</span>
                         </a>
-                        <a href="viber://chat?number=+16789376215" class="messenger-btn viber" target="_blank">
+                        <a href="viber://chat?number=+16789376215" class="messenger-btn viber" target="_blank" rel="noopener">
                             <i class="fab fa-viber"></i>
                             <span>Viber</span>
                         </a>
@@ -939,9 +1040,8 @@
                     <div class="contact-social">
                         <span data-i18n="contact.follow">Follow Us</span>
                         <div class="social-links">
-                            <a href="https://facebook.com/shvetscleaning" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://instagram.com/shvetscleaning" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="https://g.page/shvetscleaning" target="_blank" aria-label="Google"><i class="fab fa-google"></i></a>
+                            <a href="https://facebook.com/shvetscleaning" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://instagram.com/shvetscleaning" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
@@ -949,24 +1049,28 @@
                 <div class="contact-form-wrapper animate-reveal delay-2">
                     <div class="contact-form-card">
                         <h3 data-i18n="contact.form.title">Request a Free Quote</h3>
+                        <p class="form-notice">
+                            <i class="fas fa-lock"></i>
+                            <span data-i18n="contact.form.notice">Your info is sent directly to our team via WhatsApp for fastest response.</span>
+                        </p>
                         <form id="contactForm" class="contact-form">
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="contactName" data-i18n="contact.form.name">Your Name</label>
-                                    <input type="text" id="contactName" class="form-input" required>
+                                    <input type="text" id="contactName" class="form-input" required autocomplete="name">
                                 </div>
                                 <div class="form-group">
                                     <label for="contactPhone" data-i18n="contact.form.phone">Phone Number</label>
-                                    <input type="tel" id="contactPhone" class="form-input" required>
+                                    <input type="tel" id="contactPhone" class="form-input" required autocomplete="tel">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="contactEmail" data-i18n="contact.form.email">Email Address</label>
-                                <input type="email" id="contactEmail" class="form-input" required>
+                                <input type="email" id="contactEmail" class="form-input" required autocomplete="email">
                             </div>
                             <div class="form-group">
                                 <label for="contactAddress" data-i18n="contact.form.address">Property Address</label>
-                                <input type="text" id="contactAddress" class="form-input" placeholder="Enter your address for accurate quote">
+                                <input type="text" id="contactAddress" class="form-input" placeholder="Enter your address for accurate quote" autocomplete="street-address">
                             </div>
                             <div class="form-group">
                                 <label for="contactMessage" data-i18n="contact.form.message">Message</label>
@@ -998,9 +1102,8 @@
                         </a>
                         <p class="footer-desc" data-i18n="footer.desc">Premium residential cleaning services for discerning homeowners in North Atlanta. Family-owned, fully insured, satisfaction guaranteed.</p>
                         <div class="footer-social">
-                            <a href="https://facebook.com/shvetscleaning" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://instagram.com/shvetscleaning" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="https://g.page/shvetscleaning" target="_blank" aria-label="Google"><i class="fab fa-google"></i></a>
+                            <a href="https://facebook.com/shvetscleaning" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://instagram.com/shvetscleaning" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                     
@@ -1030,31 +1133,31 @@
                         <h4 data-i18n="footer.contact">Contact</h4>
                         <ul>
                             <li>
-                                <a href="tel:+16789376215">
+                                <a href="tel:+16789376215" onclick="event.stopPropagation();">
                                     <i class="fas fa-phone-alt"></i>
                                     <span>(678) 937-6215</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="mailto:e79e79@gmail.com">
+                                <a href="mailto:shvetspro@gmail.com">
                                     <i class="fas fa-envelope"></i>
-                                    <span>e79e79@gmail.com</span>
+                                    <span>shvetspro@gmail.com</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="https://wa.me/16789376215" target="_blank">
+                                <a href="https://wa.me/16789376215" target="_blank" rel="noopener">
                                     <i class="fab fa-whatsapp"></i>
                                     <span>WhatsApp</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="https://t.me/+16789376215" target="_blank">
+                                <a href="https://t.me/+16789376215" target="_blank" rel="noopener">
                                     <i class="fab fa-telegram-plane"></i>
                                     <span>Telegram</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="viber://chat?number=+16789376215" target="_blank">
+                                <a href="viber://chat?number=+16789376215" target="_blank" rel="noopener">
                                     <i class="fab fa-viber"></i>
                                     <span>Viber</span>
                                 </a>
@@ -1067,23 +1170,22 @@
         
         <div class="footer-bottom">
             <div class="container">
-                <p>&copy; 2024 Shvets Family LLC. <span data-i18n="footer.rights">All rights reserved.</span></p>
+                <p>&copy; 2025 Shvets Family LLC. <span data-i18n="footer.rights">All rights reserved.</span></p>
                 <div class="footer-legal">
-                    <a href="#" data-i18n="footer.privacy">Privacy Policy</a>
-                    <a href="#" data-i18n="footer.terms">Terms of Service</a>
+                    <span>Licensed & Insured in Georgia</span>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- ====== BOOKING MODAL ====== -->
-    <div class="modal" id="bookingModal">
+    <div class="modal" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-overlay"></div>
         <div class="modal-container">
             <button class="modal-close" id="modalClose" aria-label="Close Modal"><i class="fas fa-times"></i></button>
             
             <div class="modal-header">
-                <h3 data-i18n="modal.title">Complete Your Booking</h3>
+                <h3 id="modalTitle" data-i18n="modal.title">Complete Your Booking</h3>
                 <div class="booking-summary" id="bookingSummary"></div>
             </div>
             
@@ -1091,22 +1193,22 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="bookName" data-i18n="modal.name">Full Name</label>
-                        <input type="text" id="bookName" class="form-input" required>
+                        <input type="text" id="bookName" class="form-input" required autocomplete="name">
                     </div>
                     <div class="form-group">
                         <label for="bookPhone" data-i18n="modal.phone">Phone</label>
-                        <input type="tel" id="bookPhone" class="form-input" required>
+                        <input type="tel" id="bookPhone" class="form-input" required autocomplete="tel">
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label for="bookEmail" data-i18n="modal.email">Email</label>
-                    <input type="email" id="bookEmail" class="form-input" required>
+                    <input type="email" id="bookEmail" class="form-input" required autocomplete="email">
                 </div>
                 
                 <div class="form-group">
                     <label for="bookAddress" data-i18n="modal.address">Property Address</label>
-                    <input type="text" id="bookAddress" class="form-input" required placeholder="Enter your full address">
+                    <input type="text" id="bookAddress" class="form-input" required placeholder="Enter your full address" autocomplete="street-address">
                 </div>
                 
                 <div class="form-row">
@@ -1139,18 +1241,18 @@
 
     <!-- ====== FLOATING ACTION BUTTONS ====== -->
     <div class="floating-actions">
-        <a href="https://wa.me/16789376215?text=Hi!%20I'd%20like%20to%20get%20a%20quote%20for%20cleaning%20services." class="fab-btn whatsapp" target="_blank" title="WhatsApp">
+        <a href="https://wa.me/16789376215?text=Hi!%20I'd%20like%20to%20get%20a%20quote%20for%20cleaning%20services." class="fab-btn whatsapp" target="_blank" rel="noopener" title="WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
-        <a href="tel:+16789376215" class="fab-btn phone" title="Call Now">
+        <a href="tel:+16789376215" class="fab-btn phone" title="Call Now" onclick="event.stopPropagation();">
             <i class="fas fa-phone-alt"></i>
         </a>
-        <button class="fab-btn scroll-top" id="scrollTop" title="Back to Top">
+        <button class="fab-btn scroll-top" id="scrollTop" title="Back to Top" aria-label="Scroll to top">
             <i class="fas fa-chevron-up"></i>
         </button>
     </div>
 
-    <!-- ====== SCRIPTS ====== -->
+    <!-- Scripts -->
     <script src="translations.js"></script>
     <script src="calculator.js"></script>
     <script src="main.js"></script>

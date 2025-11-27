@@ -1,6 +1,7 @@
 // ========================================
 // SHVETS PRO - World-Class JavaScript
 // Premium Cleaning Service Website
+// Version 2.0 - Production Ready
 // ========================================
 
 // ============ PRELOADER ============
@@ -55,9 +56,14 @@ const navbar = document.getElementById('navbar');
 const navBurger = document.getElementById('navBurger');
 const navMenu = document.getElementById('navMenu');
 
-// Scroll effect
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
+// Scroll effect with throttle for performance
+let lastScrollY = 0;
+let ticking = false;
+
+function updateNavOnScroll() {
+    const scrollY = window.scrollY;
+    
+    if (scrollY > 50) {
         navbar?.classList.add('scrolled');
         langSelector?.classList.add('scrolled');
     } else {
@@ -67,12 +73,22 @@ window.addEventListener('scroll', () => {
     
     // Show/hide scroll-to-top button
     const scrollTop = document.getElementById('scrollTop');
-    if (window.scrollY > 500) {
+    if (scrollY > 500) {
         scrollTop?.classList.add('visible');
     } else {
         scrollTop?.classList.remove('visible');
     }
-});
+    
+    lastScrollY = scrollY;
+    ticking = false;
+}
+
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(updateNavOnScroll);
+        ticking = true;
+    }
+}, { passive: true });
 
 // Mobile menu toggle
 navBurger?.addEventListener('click', () => {
@@ -91,11 +107,20 @@ document.querySelectorAll('.nav-link').forEach(link => {
 });
 
 // ============ SMOOTH SCROLL ============
+// FIXED: Only handle anchor links, not tel:, mailto:, or external links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const href = this.getAttribute('href');
+        
+        // Skip if it's just "#" or empty
+        if (!href || href === '#') {
+            e.preventDefault();
+            return;
+        }
+        
+        const target = document.querySelector(href);
         if (target) {
+            e.preventDefault();
             const navHeight = navbar?.offsetHeight || 80;
             const targetPosition = target.offsetTop - navHeight;
             
@@ -120,7 +145,9 @@ function initParticles() {
     const container = document.getElementById('heroParticles');
     if (!container) return;
     
-    const particleCount = 35;
+    // Reduce particles on mobile for better performance
+    const isMobile = window.innerWidth <= 768;
+    const particleCount = isMobile ? 15 : 35;
     
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
@@ -137,33 +164,27 @@ function initParticles() {
 
 // ============ SCROLL ANIMATIONS ============
 function initAnimations() {
-    // Reveal animations on scroll
     const reveals = document.querySelectorAll('.animate-reveal');
     
-    const revealOnScroll = () => {
-        reveals.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            if (elementTop < windowHeight - 100) {
-                element.classList.add('visible');
-            }
-        });
+    // Use IntersectionObserver for better performance
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -100px 0px',
+        threshold: 0.1
     };
     
-    // Initial check
-    revealOnScroll();
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Optionally unobserve after revealing
+                // revealObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
     
-    // On scroll with throttle
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                revealOnScroll();
-                ticking = false;
-            });
-            ticking = true;
-        }
+    reveals.forEach(element => {
+        revealObserver.observe(element);
     });
     
     // Counter animation
@@ -179,19 +200,26 @@ function initCounters() {
         const isDecimal = counter.dataset.decimal === 'true';
         const duration = 2000;
         const start = 0;
-        const increment = target / (duration / 16);
-        let current = start;
+        const startTime = performance.now();
         
-        const updateCounter = () => {
-            current += increment;
-            if (current < target) {
-                if (isDecimal) {
-                    counter.textContent = (current / 10).toFixed(1);
-                } else {
-                    counter.textContent = Math.floor(current);
-                }
+        const updateCounter = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Ease out cubic for smooth deceleration
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const current = start + (target - start) * easeOut;
+            
+            if (isDecimal) {
+                counter.textContent = (current / 10).toFixed(1);
+            } else {
+                counter.textContent = Math.floor(current);
+            }
+            
+            if (progress < 1) {
                 requestAnimationFrame(updateCounter);
             } else {
+                // Ensure final value is exact
                 if (isDecimal) {
                     counter.textContent = (target / 10).toFixed(1);
                 } else {
@@ -200,7 +228,7 @@ function initCounters() {
             }
         };
         
-        updateCounter();
+        requestAnimationFrame(updateCounter);
     };
     
     const observerOptions = {
@@ -240,6 +268,11 @@ bookNowBtn?.addEventListener('click', () => {
     
     bookingModal?.classList.add('active');
     document.body.style.overflow = 'hidden';
+    
+    // Focus first input for accessibility
+    setTimeout(() => {
+        document.getElementById('bookName')?.focus();
+    }, 100);
 });
 
 // Close modal
@@ -276,28 +309,38 @@ if (bookDate) {
 bookingForm?.addEventListener('submit', function(e) {
     e.preventDefault();
     
+    // Validate form
+    if (!this.checkValidity()) {
+        this.reportValidity();
+        return;
+    }
+    
     const bookingData = getBookingSummary();
     const formData = {
-        name: document.getElementById('bookName')?.value || '',
-        phone: document.getElementById('bookPhone')?.value || '',
-        email: document.getElementById('bookEmail')?.value || '',
-        address: document.getElementById('bookAddress')?.value || '',
+        name: document.getElementById('bookName')?.value?.trim() || '',
+        phone: document.getElementById('bookPhone')?.value?.trim() || '',
+        email: document.getElementById('bookEmail')?.value?.trim() || '',
+        address: document.getElementById('bookAddress')?.value?.trim() || '',
         date: document.getElementById('bookDate')?.value || '',
         time: document.getElementById('bookTime')?.value || '',
-        notes: document.getElementById('bookNotes')?.value || ''
+        notes: document.getElementById('bookNotes')?.value?.trim() || ''
     };
     
     const message = formatBookingMessage(formData, bookingData);
     const whatsappUrl = `https://wa.me/16789376215?text=${message}`;
     
-    window.open(whatsappUrl, '_blank');
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     closeModal();
     
     // Reset form
     this.reset();
     if (bookDate) {
-        bookDate.value = new Date().toISOString().split('T')[0];
+        const today = new Date().toISOString().split('T')[0];
+        bookDate.value = today;
     }
+    
+    // Show success feedback
+    showNotification('Booking request sent! We\'ll contact you shortly.', 'success');
 });
 
 // ============ CONTACT FORM ============
@@ -306,20 +349,97 @@ const contactForm = document.getElementById('contactForm');
 contactForm?.addEventListener('submit', function(e) {
     e.preventDefault();
     
+    // Validate form
+    if (!this.checkValidity()) {
+        this.reportValidity();
+        return;
+    }
+    
     const formData = {
-        name: document.getElementById('contactName')?.value || '',
-        phone: document.getElementById('contactPhone')?.value || '',
-        email: document.getElementById('contactEmail')?.value || '',
-        address: document.getElementById('contactAddress')?.value || '',
-        message: document.getElementById('contactMessage')?.value || ''
+        name: document.getElementById('contactName')?.value?.trim() || '',
+        phone: document.getElementById('contactPhone')?.value?.trim() || '',
+        email: document.getElementById('contactEmail')?.value?.trim() || '',
+        address: document.getElementById('contactAddress')?.value?.trim() || '',
+        message: document.getElementById('contactMessage')?.value?.trim() || ''
     };
     
     const message = formatContactMessage(formData);
     const whatsappUrl = `https://wa.me/16789376215?text=${message}`;
     
-    window.open(whatsappUrl, '_blank');
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     this.reset();
+    
+    // Show success feedback
+    showNotification('Message sent! We\'ll get back to you soon.', 'success');
 });
+
+// ============ NOTIFICATION SYSTEM ============
+function showNotification(message, type = 'info') {
+    // Remove existing notification
+    const existing = document.querySelector('.notification');
+    if (existing) {
+        existing.remove();
+    }
+    
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+        <span>${message}</span>
+    `;
+    
+    // Add styles if not already present
+    if (!document.getElementById('notification-styles')) {
+        const styles = document.createElement('style');
+        styles.id = 'notification-styles';
+        styles.textContent = `
+            .notification {
+                position: fixed;
+                bottom: 100px;
+                left: 50%;
+                transform: translateX(-50%) translateY(100px);
+                background: #1a1a1a;
+                color: #fff;
+                padding: 16px 24px;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                z-index: 10000;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+                opacity: 0;
+                transition: all 0.3s ease;
+            }
+            .notification.show {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            .notification-success {
+                border-left: 4px solid #C9A962;
+            }
+            .notification-success i {
+                color: #C9A962;
+            }
+            .notification i {
+                font-size: 1.2rem;
+            }
+        `;
+        document.head.appendChild(styles);
+    }
+    
+    document.body.appendChild(notification);
+    
+    // Trigger animation
+    requestAnimationFrame(() => {
+        notification.classList.add('show');
+    });
+    
+    // Auto remove
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+    }, 4000);
+}
 
 // ============ REVIEWS SLIDER ============
 const reviewsTrack = document.querySelector('.reviews-track');
@@ -387,11 +507,15 @@ function initReviewsSlider() {
         }
     }
     
-    // Handle resize
+    // Handle resize with debounce
+    let resizeTimeout;
     window.addEventListener('resize', () => {
-        updateSlidesToShow();
-        createDots();
-        goToSlide(0);
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            updateSlidesToShow();
+            createDots();
+            goToSlide(0);
+        }, 250);
     });
 }
 
@@ -409,11 +533,12 @@ function createDots() {
     if (!sliderDots) return;
     
     sliderDots.innerHTML = '';
-    const dotsCount = Math.ceil(totalSlides - slidesToShow + 1);
+    const dotsCount = Math.max(1, totalSlides - slidesToShow + 1);
     
     for (let i = 0; i < dotsCount; i++) {
-        const dot = document.createElement('div');
+        const dot = document.createElement('button');
         dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
         dot.addEventListener('click', () => {
             goToSlide(i);
             resetAutoSlide();
@@ -423,7 +548,7 @@ function createDots() {
 }
 
 function goToSlide(index) {
-    const maxSlide = totalSlides - slidesToShow;
+    const maxSlide = Math.max(0, totalSlides - slidesToShow);
     
     if (index < 0) {
         currentSlide = maxSlide;
@@ -436,7 +561,8 @@ function goToSlide(index) {
     const card = reviewsTrack.querySelector('.review-card');
     if (!card) return;
     
-    const cardWidth = card.offsetWidth + 24; // gap
+    const cardStyle = window.getComputedStyle(card);
+    const cardWidth = card.offsetWidth + parseInt(cardStyle.marginRight || 0) + 24; // gap
     reviewsTrack.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
     
     // Update dots
@@ -461,15 +587,62 @@ const phoneInputs = document.querySelectorAll('input[type="tel"]');
 phoneInputs.forEach(input => {
     input.addEventListener('input', function() {
         let value = this.value.replace(/\D/g, '');
-        if (value.length > 10) value = value.slice(0, 10);
         
-        if (value.length >= 6) {
-            this.value = `(${value.slice(0,3)}) ${value.slice(3,6)}-${value.slice(6)}`;
-        } else if (value.length >= 3) {
+        // Handle US phone numbers
+        if (value.length > 10) {
+            // If starts with 1, allow 11 digits
+            if (value.startsWith('1')) {
+                value = value.slice(0, 11);
+            } else {
+                value = value.slice(0, 10);
+            }
+        }
+        
+        // Format based on length
+        if (value.length >= 7) {
+            if (value.startsWith('1') && value.length > 1) {
+                // Format: +1 (XXX) XXX-XXXX
+                this.value = `+1 (${value.slice(1,4)}) ${value.slice(4,7)}-${value.slice(7)}`;
+            } else if (value.length >= 6) {
+                this.value = `(${value.slice(0,3)}) ${value.slice(3,6)}-${value.slice(6)}`;
+            }
+        } else if (value.length >= 4) {
             this.value = `(${value.slice(0,3)}) ${value.slice(3)}`;
         } else {
             this.value = value;
         }
+    });
+    
+    // Allow only numbers on keypress
+    input.addEventListener('keypress', function(e) {
+        if (!/[\d]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+            // Allow paste
+            if (!(e.ctrlKey && e.key === 'v') && !(e.metaKey && e.key === 'v')) {
+                e.preventDefault();
+            }
+        }
+    });
+});
+
+// ============ EMAIL VALIDATION ============
+const emailInputs = document.querySelectorAll('input[type="email"]');
+emailInputs.forEach(input => {
+    input.addEventListener('blur', function() {
+        const email = this.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        if (email && !emailRegex.test(email)) {
+            this.setCustomValidity('Please enter a valid email address');
+            this.classList.add('invalid');
+        } else {
+            this.setCustomValidity('');
+            this.classList.remove('invalid');
+        }
+    });
+    
+    input.addEventListener('input', function() {
+        this.setCustomValidity('');
+        this.classList.remove('invalid');
     });
 });
 
@@ -480,7 +653,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Load saved language
     const savedLang = localStorage.getItem('shvets-lang') || 'en';
-    setLanguage(savedLang);
+    if (typeof setLanguage === 'function') {
+        setLanguage(savedLang);
+    }
     
     // Update language selector display
     if (currentLang) {
@@ -496,6 +671,9 @@ document.addEventListener('DOMContentLoaded', () => {
             img.setAttribute('loading', 'lazy');
         }
     });
+    
+    // Prevent flash of unstyled content
+    document.body.classList.add('loaded');
 });
 
 // ============ PERFORMANCE: Debounce utility ============
@@ -515,7 +693,7 @@ function debounce(func, wait) {
 // Focus trap for modal
 function trapFocus(element) {
     const focusableElements = element.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
     );
     const firstElement = focusableElements[0];
     const lastElement = focusableElements[focusableElements.length - 1];
@@ -537,3 +715,26 @@ function trapFocus(element) {
 if (bookingModal) {
     trapFocus(bookingModal);
 }
+
+// ============ ERROR HANDLING ============
+window.addEventListener('error', (e) => {
+    console.error('JavaScript Error:', e.message);
+    // Optionally send to analytics
+});
+
+// ============ PREVENT DOUBLE FORM SUBMISSION ============
+document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', function() {
+        const submitBtn = this.querySelector('button[type="submit"]');
+        if (submitBtn && !submitBtn.disabled) {
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.7';
+            
+            // Re-enable after 3 seconds as fallback
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = '1';
+            }, 3000);
+        }
+    });
+});

@@ -1,6 +1,7 @@
 // ========================================
 // SHVETS PRO - Translations
 // EN, RU, UK (Ukrainian), ES
+// Version 2.0 - Production Ready
 // ========================================
 
 const translations = {
@@ -18,7 +19,7 @@ const translations = {
         "nav.book": "Get Quote",
         
         // Hero
-        "hero.badge": "North Atlanta's #1 Premium Cleaning Service",
+        "hero.badge": "North Atlanta's Premium Cleaning Service",
         "hero.title1": "Luxury Cleaning",
         "hero.title2": "Exceptional Results",
         "hero.subtitle": "White-glove residential cleaning for discerning homeowners in Alpharetta, Woodstock, Johns Creek & beyond. Where meticulous attention meets uncompromising excellence.",
@@ -27,7 +28,7 @@ const translations = {
         "hero.feature3": "100% Guaranteed",
         "hero.cta1": "Calculate Your Price",
         "hero.cta2": "WhatsApp Us",
-        "hero.trust": "500+ Families Trust Us",
+        "hero.trust": "Trusted by Families Across North Atlanta",
         "hero.scroll": "Discover",
         
         // Stats
@@ -139,7 +140,7 @@ const translations = {
         // Reviews
         "reviews.tag": "Testimonials",
         "reviews.title": "What Our Clients Say",
-        "reviews.based": "based on 120+ reviews",
+        "reviews.based": "based on Google Reviews",
         "reviews.google": "See Google Reviews",
         "reviews.facebook": "See Facebook Reviews",
         
@@ -152,6 +153,7 @@ const translations = {
         "contact.message": "Send Message",
         "contact.follow": "Follow Us",
         "contact.form.title": "Request a Free Quote",
+        "contact.form.notice": "Your info is sent directly to our team via WhatsApp for fastest response.",
         "contact.form.name": "Your Name",
         "contact.form.phone": "Phone Number",
         "contact.form.email": "Email Address",
@@ -201,16 +203,16 @@ const translations = {
         "nav.book": "Заказать",
         
         // Hero
-        "hero.badge": "Премиум уборка #1 в Северной Атланте",
+        "hero.badge": "Премиум уборка в Северной Атланте",
         "hero.title1": "Люкс Уборка",
         "hero.title2": "Безупречный Результат",
         "hero.subtitle": "Премиальная уборка для требовательных владельцев домов в Alpharetta, Woodstock, Johns Creek и окрестностях. Безупречное внимание к каждой детали.",
         "hero.feature1": "Мгновенный расчёт",
-        "hero.feature2": "Бронь в тот же день",
+        "hero.feature2": "Бронирование в тот же день",
         "hero.feature3": "100% Гарантия",
-        "hero.cta1": "Рассчитать стоимость",
+        "hero.cta1": "Рассчитать цену",
         "hero.cta2": "Написать в WhatsApp",
-        "hero.trust": "Нам доверяют 500+ семей",
+        "hero.trust": "Нам доверяют семьи по всей Северной Атланте",
         "hero.scroll": "Узнать больше",
         
         // Stats
@@ -225,7 +227,7 @@ const translations = {
         "services.subtitle": "Индивидуальные пакеты для требовательных владельцев домов",
         "services.weekly": "Хит недели",
         "services.popular": "Самое популярное",
-        "services.thorough": "Самая тщательная",
+        "services.thorough": "Самое тщательное",
         "services.fast": "Быстрый оборот",
         "services.from": "От",
         "services.book": "Заказать",
@@ -280,13 +282,13 @@ const translations = {
         "calc.bedrooms": "Спален",
         "calc.bathrooms": "Ванных",
         "calc.sqft": "Площадь",
-        "calc.sqft1": "До 1,500 sq ft",
-        "calc.sqft2": "1,500 - 2,000 sq ft",
-        "calc.sqft3": "2,000 - 2,500 sq ft",
-        "calc.sqft4": "2,500 - 3,000 sq ft",
-        "calc.sqft5": "3,000 - 3,500 sq ft",
-        "calc.sqft6": "3,500 - 4,000 sq ft",
-        "calc.sqft7": "4,000+ sq ft",
+        "calc.sqft1": "До 140 м² (1,500 sq ft)",
+        "calc.sqft2": "140 - 185 м² (1,500 - 2,000 sq ft)",
+        "calc.sqft3": "185 - 230 м² (2,000 - 2,500 sq ft)",
+        "calc.sqft4": "230 - 280 м² (2,500 - 3,000 sq ft)",
+        "calc.sqft5": "280 - 325 м² (3,000 - 3,500 sq ft)",
+        "calc.sqft6": "325 - 370 м² (3,500 - 4,000 sq ft)",
+        "calc.sqft7": "370+ м² (4,000+ sq ft)",
         "calc.extras": "Дополнительно",
         "calc.extra.fridge": "Внутри холодильника",
         "calc.extra.oven": "Внутри духовки",
@@ -322,7 +324,7 @@ const translations = {
         // Reviews
         "reviews.tag": "Отзывы",
         "reviews.title": "Что говорят наши клиенты",
-        "reviews.based": "на основе 120+ отзывов",
+        "reviews.based": "на основе отзывов Google",
         "reviews.google": "Отзывы в Google",
         "reviews.facebook": "Отзывы в Facebook",
         
@@ -335,6 +337,7 @@ const translations = {
         "contact.message": "Отправить сообщение",
         "contact.follow": "Мы в соцсетях",
         "contact.form.title": "Запросить бесплатный расчёт",
+        "contact.form.notice": "Ваши данные отправляются напрямую нашей команде через WhatsApp для быстрого ответа.",
         "contact.form.name": "Ваше имя",
         "contact.form.phone": "Телефон",
         "contact.form.email": "Email",
@@ -384,7 +387,7 @@ const translations = {
         "nav.book": "Замовити",
         
         // Hero
-        "hero.badge": "Преміум прибирання #1 в Північній Атланті",
+        "hero.badge": "Преміум прибирання в Північній Атланті",
         "hero.title1": "Люкс Прибирання",
         "hero.title2": "Бездоганний Результат",
         "hero.subtitle": "Преміальне прибирання для вибагливих власників домів в Alpharetta, Woodstock, Johns Creek та околицях. Бездоганна увага до кожної деталі.",
@@ -393,7 +396,7 @@ const translations = {
         "hero.feature3": "100% Гарантія",
         "hero.cta1": "Розрахувати вартість",
         "hero.cta2": "Написати в WhatsApp",
-        "hero.trust": "Нам довіряють 500+ сімей",
+        "hero.trust": "Нам довіряють родини по всій Північній Атланті",
         "hero.scroll": "Дізнатися більше",
         
         // Stats
@@ -463,13 +466,13 @@ const translations = {
         "calc.bedrooms": "Спалень",
         "calc.bathrooms": "Ванних",
         "calc.sqft": "Площа",
-        "calc.sqft1": "До 1,500 sq ft",
-        "calc.sqft2": "1,500 - 2,000 sq ft",
-        "calc.sqft3": "2,000 - 2,500 sq ft",
-        "calc.sqft4": "2,500 - 3,000 sq ft",
-        "calc.sqft5": "3,000 - 3,500 sq ft",
-        "calc.sqft6": "3,500 - 4,000 sq ft",
-        "calc.sqft7": "4,000+ sq ft",
+        "calc.sqft1": "До 140 м² (1,500 sq ft)",
+        "calc.sqft2": "140 - 185 м² (1,500 - 2,000 sq ft)",
+        "calc.sqft3": "185 - 230 м² (2,000 - 2,500 sq ft)",
+        "calc.sqft4": "230 - 280 м² (2,500 - 3,000 sq ft)",
+        "calc.sqft5": "280 - 325 м² (3,000 - 3,500 sq ft)",
+        "calc.sqft6": "325 - 370 м² (3,500 - 4,000 sq ft)",
+        "calc.sqft7": "370+ м² (4,000+ sq ft)",
         "calc.extras": "Додатково",
         "calc.extra.fridge": "Всередині холодильника",
         "calc.extra.oven": "Всередині духовки",
@@ -505,7 +508,7 @@ const translations = {
         // Reviews
         "reviews.tag": "Відгуки",
         "reviews.title": "Що кажуть наші клієнти",
-        "reviews.based": "на основі 120+ відгуків",
+        "reviews.based": "на основі відгуків Google",
         "reviews.google": "Відгуки в Google",
         "reviews.facebook": "Відгуки в Facebook",
         
@@ -518,6 +521,7 @@ const translations = {
         "contact.message": "Надіслати повідомлення",
         "contact.follow": "Ми в соцмережах",
         "contact.form.title": "Запросити безкоштовний розрахунок",
+        "contact.form.notice": "Ваші дані надсилаються напряму нашій команді через WhatsApp для швидкої відповіді.",
         "contact.form.name": "Ваше ім'я",
         "contact.form.phone": "Телефон",
         "contact.form.email": "Email",
@@ -567,28 +571,28 @@ const translations = {
         "nav.book": "Cotizar",
         
         // Hero
-        "hero.badge": "Servicio de limpieza premium #1 en North Atlanta",
+        "hero.badge": "Servicio de limpieza premium en North Atlanta",
         "hero.title1": "Limpieza de Lujo",
         "hero.title2": "Resultados Excepcionales",
-        "hero.subtitle": "Limpieza residencial de primera clase para propietarios exigentes en Alpharetta, Woodstock, Johns Creek y más. Donde la atención meticulosa se encuentra con la excelencia.",
-        "hero.feature1": "Precios instantáneos",
+        "hero.subtitle": "Limpieza residencial premium para propietarios exigentes en Alpharetta, Woodstock, Johns Creek y más. Atención meticulosa a cada detalle.",
+        "hero.feature1": "Precios Instantáneos",
         "hero.feature2": "Reserva el mismo día",
         "hero.feature3": "100% Garantizado",
         "hero.cta1": "Calcular precio",
         "hero.cta2": "WhatsApp",
-        "hero.trust": "500+ Familias confían en nosotros",
+        "hero.trust": "Familias confían en nosotros en North Atlanta",
         "hero.scroll": "Descubrir",
         
         // Stats
-        "stats.homes": "Casas limpiadas",
+        "stats.homes": "Hogares limpiados",
         "stats.clients": "Clientes felices",
         "stats.rating": "Calificación Google",
         "stats.satisfaction": "Satisfacción",
         
         // Services
-        "services.tag": "Nuestros servicios",
-        "services.title": "Soluciones de limpieza premium",
-        "services.subtitle": "Paquetes personalizados diseñados para propietarios exigentes que demandan excelencia",
+        "services.tag": "Nuestros Servicios",
+        "services.title": "Soluciones de Limpieza Premium",
+        "services.subtitle": "Paquetes personalizados para propietarios que exigen excelencia",
         "services.weekly": "Favorito semanal",
         "services.popular": "Más popular",
         "services.thorough": "Más completo",
@@ -688,7 +692,7 @@ const translations = {
         // Reviews
         "reviews.tag": "Testimonios",
         "reviews.title": "Lo que dicen nuestros clientes",
-        "reviews.based": "basado en 120+ reseñas",
+        "reviews.based": "basado en reseñas de Google",
         "reviews.google": "Ver reseñas de Google",
         "reviews.facebook": "Ver reseñas de Facebook",
         
@@ -701,6 +705,7 @@ const translations = {
         "contact.message": "Enviar mensaje",
         "contact.follow": "Síguenos",
         "contact.form.title": "Solicitar cotización gratis",
+        "contact.form.notice": "Tu información se envía directamente a nuestro equipo vía WhatsApp para respuesta más rápida.",
         "contact.form.name": "Tu nombre",
         "contact.form.phone": "Teléfono",
         "contact.form.email": "Email",
@@ -745,7 +750,14 @@ function setLanguage(lang) {
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
         if (langData[key]) {
-            element.textContent = langData[key];
+            // Handle different element types
+            if (element.tagName === 'INPUT' && element.type === 'text') {
+                element.placeholder = langData[key];
+            } else if (element.tagName === 'TEXTAREA') {
+                element.placeholder = langData[key];
+            } else {
+                element.textContent = langData[key];
+            }
         }
     });
     
@@ -757,12 +769,24 @@ function setLanguage(lang) {
     
     // Recalculate price to update summary
     if (typeof calculatePrice === 'function') {
-        calculatePrice();
+        setTimeout(calculatePrice, 100);
     }
 }
 
+// Get translation helper
+function t(key, lang) {
+    const language = lang || localStorage.getItem('shvets-lang') || 'en';
+    const langData = translations[language] || translations.en;
+    return langData[key] || translations.en[key] || key;
+}
+
 // Initialize language on load
-document.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedLang = localStorage.getItem('shvets-lang') || 'en';
+        setLanguage(savedLang);
+    });
+} else {
     const savedLang = localStorage.getItem('shvets-lang') || 'en';
     setLanguage(savedLang);
-});
+}
