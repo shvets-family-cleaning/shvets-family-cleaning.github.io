@@ -4,17 +4,58 @@
 // Version 2.0 - Production Ready
 // ========================================
 
-// ============ PRELOADER ============
-window.addEventListener('load', () => {
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-        setTimeout(() => {
-            preloader.classList.add('hidden');
-            // Initialize animations after preloader
-            initAnimations();
-        }, 1800);
+// ============ PRELOADER - BULLETPROOF ============
+(function() {
+    'use strict';
+    
+    function hidePreloader() {
+        try {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+                preloader.style.pointerEvents = 'none';
+                preloader.classList.add('hidden');
+                
+                // Try to init animations, but don't block if it fails
+                try {
+                    if (typeof initAnimations === 'function') {
+                        initAnimations();
+                    }
+                } catch(e) {
+                    console.warn('Animation init failed:', e);
+                }
+            }
+        } catch(e) {
+            console.error('Preloader error:', e);
+            // Force hide preloader element directly
+            const p = document.getElementById('preloader');
+            if (p) p.style.display = 'none';
+        }
     }
-});
+    
+    // Method 1: On window load
+    window.addEventListener('load', function() {
+        setTimeout(hidePreloader, 1200);
+    });
+    
+    // Method 2: On DOM ready
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(hidePreloader, 2000);
+    });
+    
+    // Method 3: Absolute fallback - WILL hide in 3 seconds NO MATTER WHAT
+    setTimeout(hidePreloader, 3000);
+    
+    // Method 4: Even more aggressive fallback
+    setTimeout(function() {
+        const p = document.getElementById('preloader');
+        if (p && p.style.display !== 'none') {
+            p.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    }, 5000);
+})();
 
 // ============ LANGUAGE SELECTOR ============
 const langSelector = document.getElementById('langSelector');
@@ -737,4 +778,71 @@ document.querySelectorAll('form').forEach(form => {
             }, 3000);
         }
     });
+});
+
+// ============ FAQ ACCORDION ============
+document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', function() {
+        const faqItem = this.parentElement;
+        const isActive = faqItem.classList.contains('active');
+        
+        // Close all FAQ items
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.classList.remove('active');
+            item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        
+        // Open clicked item if it wasn't active
+        if (!isActive) {
+            faqItem.classList.add('active');
+            this.setAttribute('aria-expanded', 'true');
+        }
+    });
+});
+
+// ============ SMART EMAIL HANDLER ============
+// Provides fallback to Gmail web if mailto: doesn't work
+window.handleEmailClick = function(e, email) {
+    // Check if mailto handler exists
+    const mailtoSupported = (() => {
+        // Mobile devices usually have mail apps
+        if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            return true;
+        }
+        // Desktop - try to detect if handler is registered
+        // This is tricky, so we provide a choice
+        return false;
+    })();
+    
+    // On desktop without obvious mail client, offer choice
+    if (!mailtoSupported && !e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+        
+        // Show email options modal
+        const choice = confirm(
+            `📧 Open email to: ${email}\n\n` +
+            `Click OK to open Gmail in browser\n` +
+            `Click Cancel to try your default email app`
+        );
+        
+        if (choice) {
+            // Open Gmail compose
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent('Cleaning Service Inquiry')}&body=${encodeURIComponent('Hi SHVETS PRO team,\n\nI would like to inquire about your cleaning services.\n\n')}`;
+            window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+        } else {
+            // Try mailto anyway
+            window.location.href = `mailto:${email}`;
+        }
+    }
+    // On mobile or with modifier key, let default mailto work
+};
+
+// Also handle email links without onclick
+document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+    if (!link.hasAttribute('onclick')) {
+        link.addEventListener('click', function(e) {
+            const email = this.href.replace('mailto:', '').split('?')[0];
+            handleEmailClick(e, email);
+        });
+    }
 });
