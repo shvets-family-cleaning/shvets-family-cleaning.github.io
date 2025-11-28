@@ -1,443 +1,276 @@
-// ========================================
-// SHVETS PRO - Premium Price Calculator
-// Ultra-Premium Pricing for North Atlanta
-// Version 2.0 - Production Ready
-// ========================================
+/**
+ * ============================================================================
+ * SHVETS PRO - Premium Price Calculator
+ * Version 4.0 - Compatible with new HTML structure
+ * ============================================================================
+ */
 
-// Premium Base Prices - North Atlanta Luxury Market
-const basePrices = {
-    standard: { 
-        base: 219,      // Base price for standard cleaning
-        bedroom: 40,    // Per bedroom
-        bathroom: 35    // Per bathroom
-    },
-    deep: { 
-        base: 349,      // Deep cleaning base (luxury tier)
-        bedroom: 55,    // Per bedroom  
-        bathroom: 50    // Per bathroom
-    },
-    moveout: { 
-        base: 449,      // Move in/out base (premium)
-        bedroom: 65,    // Per bedroom
-        bathroom: 60    // Per bathroom
-    },
-    airbnb: { 
-        base: 179,      // Airbnb turnover base
-        bedroom: 35,    // Per bedroom
-        bathroom: 30    // Per bathroom
-    }
-};
+'use strict';
 
-// Square footage multipliers - Premium scaling
-const sqftMultipliers = {
-    1500: 1.0,      // Under 1,500 sq ft - base price
-    2000: 1.12,     // 1,500 - 2,000 sq ft
-    2500: 1.25,     // 2,000 - 2,500 sq ft
-    3000: 1.4,      // 2,500 - 3,000 sq ft
-    3500: 1.55,     // 3,000 - 3,500 sq ft
-    4000: 1.75,     // 3,500 - 4,000 sq ft
-    5000: 2.0       // 4,000+ sq ft
-};
-
-// Service names for display - All languages (UTF-8 encoded properly)
-const serviceNames = {
-    en: {
-        standard: 'Standard Cleaning',
-        deep: 'Deep Cleaning',
-        moveout: 'Move In/Out Cleaning',
-        airbnb: 'Airbnb Turnover'
-    },
-    ru: {
-        standard: 'Стандартная уборка',
-        deep: 'Генеральная уборка',
-        moveout: 'Уборка при переезде',
-        airbnb: 'Airbnb уборка'
-    },
-    uk: {
-        standard: 'Стандартне прибирання',
-        deep: 'Генеральне прибирання',
-        moveout: 'Прибирання при переїзді',
-        airbnb: 'Airbnb прибирання'
-    },
-    es: {
-        standard: 'Limpieza Estándar',
-        deep: 'Limpieza Profunda',
-        moveout: 'Limpieza de Mudanza',
-        airbnb: 'Rotación Airbnb'
-    }
-};
-
-// Room labels for all languages
-const roomLabels = {
-    en: {
-        bedroom: 'Bedroom',
-        bedrooms: 'Bedrooms',
-        bathroom: 'Bathroom',
-        bathrooms: 'Bathrooms'
-    },
-    ru: {
-        bedroom: 'спальня',
-        bedrooms: 'спален',
-        bathroom: 'ванная',
-        bathrooms: 'ванных'
-    },
-    uk: {
-        bedroom: 'спальня',
-        bedrooms: 'спалень',
-        bathroom: 'ванна',
-        bathrooms: 'ванних'
-    },
-    es: {
-        bedroom: 'habitación',
-        bedrooms: 'habitaciones',
-        bathroom: 'baño',
-        bathrooms: 'baños'
-    }
-};
-
-// Calculate price
-function calculatePrice() {
-    // Get selected service
-    const serviceInput = document.querySelector('input[name="service"]:checked');
-    const service = serviceInput ? serviceInput.value : 'standard';
+const Calculator = (() => {
+    // ========================================
+    // PRICING CONFIGURATION
+    // ========================================
     
-    // Get bedroom and bathroom counts
-    const bedroomsInput = document.getElementById('bedrooms');
-    const bathroomsInput = document.getElementById('bathrooms');
-    const bedrooms = bedroomsInput ? parseInt(bedroomsInput.value) || 3 : 3;
-    const bathrooms = bathroomsInput ? parseInt(bathroomsInput.value) || 2 : 2;
-    
-    // Get square footage
-    const sqftSelect = document.getElementById('sqft');
-    const sqft = sqftSelect ? parseInt(sqftSelect.value) || 2000 : 2000;
-    
-    // Get extras
-    let extrasTotal = 0;
-    const extraInputs = document.querySelectorAll('input[name="extras"]:checked');
-    extraInputs.forEach(input => {
-        extrasTotal += parseInt(input.getAttribute('data-price')) || 0;
-    });
-    
-    // Calculate base price
-    const pricing = basePrices[service];
-    let price = pricing.base;
-    price += bedrooms * pricing.bedroom;
-    price += bathrooms * pricing.bathroom;
-    
-    // Apply square footage multiplier
-    const multiplier = sqftMultipliers[sqft] || 1;
-    price *= multiplier;
-    
-    // Add extras
-    price += extrasTotal;
-    
-    // Round to nearest $5
-    price = Math.round(price / 5) * 5;
-    
-    // Ensure minimum price
-    const minPrices = {
-        standard: 199,
-        deep: 349,
-        moveout: 449,
-        airbnb: 179
+    // Base prices (psychological pricing - not round numbers)
+    const prices = {
+        standard: { base: 139, bedroom: 35, bathroom: 30 },
+        deep:     { base: 219, bedroom: 45, bathroom: 40 },
+        move:     { base: 289, bedroom: 55, bathroom: 50 },
+        airbnb:   { base: 119, bedroom: 30, bathroom: 25 }
     };
-    price = Math.max(price, minPrices[service]);
     
-    // Update display
-    const priceDisplay = document.getElementById('estimatedPrice');
-    if (priceDisplay) {
-        animatePrice(priceDisplay, price);
-    }
-    
-    return {
-        service,
-        bedrooms,
-        bathrooms,
-        sqft,
-        extras: extrasTotal,
-        price
+    // Frequency discounts
+    const discounts = {
+        once: 0,
+        monthly: 0.10,
+        biweekly: 0.15,
+        weekly: 0.20
     };
-}
-
-// Animate price counter with smooth effect
-function animatePrice(element, targetPrice) {
-    const currentPrice = parseInt(element.textContent) || 0;
-    const difference = targetPrice - currentPrice;
     
-    if (difference === 0) return;
+    // Add-on prices
+    const addons = {
+        fridge: 35,
+        oven: 35,
+        windows: 50,
+        laundry: 25
+    };
     
-    const duration = 400; // ms
-    const startTime = performance.now();
+    // ========================================
+    // STATE
+    // ========================================
     
-    // Add pulse effect
-    element.style.transform = 'scale(1.05)';
-    element.style.color = '#C9A962';
+    let state = {
+        service: 'standard',
+        bedrooms: 3,
+        bathrooms: 2,
+        frequency: 'monthly',
+        extras: []
+    };
     
-    const animate = (currentTime) => {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
+    // ========================================
+    // DOM ELEMENTS
+    // ========================================
+    
+    const elements = {};
+    
+    const cacheElements = () => {
+        elements.serviceOptions = document.querySelectorAll('#serviceOptions .calc-option');
+        elements.frequencyOptions = document.querySelectorAll('#frequencyOptions .calc-option');
+        elements.bedrooms = document.getElementById('bedrooms');
+        elements.bathrooms = document.getElementById('bathrooms');
+        elements.addonCheckboxes = document.querySelectorAll('#addonOptions input[type="checkbox"]');
+        elements.totalPrice = document.getElementById('totalPrice');
+        elements.savingsAmount = document.getElementById('savingsAmount');
+        elements.discountInfo = document.getElementById('discountInfo');
+        elements.bookNowBtn = document.getElementById('bookNowBtn');
+    };
+    
+    // ========================================
+    // CALCULATION
+    // ========================================
+    
+    const calculate = () => {
+        const pricing = prices[state.service] || prices.standard;
         
-        // Ease out cubic
-        const easeOut = 1 - Math.pow(1 - progress, 3);
-        const newPrice = Math.round(currentPrice + (difference * easeOut));
+        // Base calculation
+        let subtotal = pricing.base;
+        subtotal += (state.bedrooms - 1) * pricing.bedroom;
+        subtotal += (state.bathrooms - 1) * pricing.bathroom;
         
-        element.textContent = newPrice;
+        // Add extras
+        state.extras.forEach(addon => {
+            subtotal += addons[addon] || 0;
+        });
         
-        if (progress < 1) {
-            requestAnimationFrame(animate);
-        } else {
-            element.textContent = targetPrice;
-            element.style.transform = 'scale(1)';
-            element.style.color = '';
+        // Calculate discount
+        const discountPercent = discounts[state.frequency] || 0;
+        const savings = Math.round(subtotal * discountPercent);
+        const total = subtotal - savings;
+        
+        return { subtotal, savings, total, discountPercent };
+    };
+    
+    const updateDisplay = () => {
+        const result = calculate();
+        
+        // Update price
+        if (elements.totalPrice) {
+            elements.totalPrice.textContent = `$${result.total}`;
+        }
+        
+        // Update savings
+        if (elements.savingsAmount) {
+            elements.savingsAmount.textContent = `$${result.savings}`;
+        }
+        
+        // Show/hide discount info
+        if (elements.discountInfo) {
+            elements.discountInfo.style.display = result.savings > 0 ? 'flex' : 'none';
         }
     };
     
-    requestAnimationFrame(animate);
-}
-
-// Number input controls
-function setupNumberInputs() {
-    document.querySelectorAll('.num-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault(); // Prevent form submission
-            
-            const targetId = this.getAttribute('data-target');
-            const input = document.getElementById(targetId);
-            if (!input) return;
-            
-            let value = parseInt(input.value) || 1;
-            
-            if (this.classList.contains('plus')) {
-                value = Math.min(value + 1, 10);
-            } else if (this.classList.contains('minus')) {
-                value = Math.max(value - 1, 1);
-            }
-            
-            input.value = value;
-            
-            // Add haptic feedback animation
-            this.style.transform = 'scale(0.9)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 100);
-            
-            calculatePrice();
-        });
-    });
-}
-
-// Setup calculator event listeners
-function setupCalculator() {
-    // Service type selection
-    document.querySelectorAll('input[name="service"]').forEach(input => {
-        input.addEventListener('change', calculatePrice);
-    });
+    // ========================================
+    // EVENT HANDLERS
+    // ========================================
     
-    // Square footage selection
-    const sqftSelect = document.getElementById('sqft');
-    if (sqftSelect) {
-        sqftSelect.addEventListener('change', calculatePrice);
-    }
-    
-    // Extras checkboxes
-    document.querySelectorAll('input[name="extras"]').forEach(input => {
-        input.addEventListener('change', function() {
-            // Add visual feedback
-            const content = this.nextElementSibling;
-            if (content) {
-                content.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    content.style.transform = 'scale(1)';
-                }, 100);
-            }
-            calculatePrice();
-        });
-    });
-    
-    // Number inputs
-    setupNumberInputs();
-    
-    // Initial calculation
-    setTimeout(calculatePrice, 100);
-}
-
-// Get booking summary
-function getBookingSummary() {
-    const data = calculatePrice();
-    const lang = localStorage.getItem('shvets-lang') || 'en';
-    const names = serviceNames[lang] || serviceNames.en;
-    const labels = roomLabels[lang] || roomLabels.en;
-    
-    // Determine singular/plural
-    const bedroomText = data.bedrooms === 1 ? labels.bedroom : labels.bedrooms;
-    const bathroomText = data.bathrooms === 1 ? labels.bathroom : labels.bathrooms;
-    
-    return {
-        serviceName: names[data.service],
-        bedrooms: data.bedrooms,
-        bathrooms: data.bathrooms,
-        bedroomText,
-        bathroomText,
-        price: data.price,
-        data
+    const handleServiceClick = (e) => {
+        const btn = e.currentTarget;
+        
+        // Update UI
+        elements.serviceOptions.forEach(opt => opt.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Update state
+        state.service = btn.dataset.value;
+        
+        // Animate
+        btn.style.transform = 'scale(0.95)';
+        setTimeout(() => btn.style.transform = '', 150);
+        
+        updateDisplay();
     };
-}
-
-// Format booking message for WhatsApp
-function formatBookingMessage(formData, bookingData) {
-    const lang = localStorage.getItem('shvets-lang') || 'en';
     
-    let message;
+    const handleFrequencyClick = (e) => {
+        const btn = e.currentTarget;
+        
+        // Update UI
+        elements.frequencyOptions.forEach(opt => opt.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Update state
+        state.frequency = btn.dataset.value;
+        
+        // Animate
+        btn.style.transform = 'scale(0.95)';
+        setTimeout(() => btn.style.transform = '', 150);
+        
+        updateDisplay();
+    };
     
-    switch(lang) {
-        case 'ru':
-            message = `✨ НОВАЯ ЗАЯВКА НА УБОРКУ
-
-📋 Услуга: ${bookingData.serviceName}
-🛏️ Спален: ${bookingData.bedrooms}
-🚿 Ванных: ${bookingData.bathrooms}
-💰 Примерная цена: $${bookingData.price}
-
-👤 Имя: ${formData.name}
-📱 Телефон: ${formData.phone}
-📧 Email: ${formData.email}
-📍 Адрес: ${formData.address}
-📅 Дата: ${formData.date}
-⏰ Время: ${formData.time}
-📝 Примечания: ${formData.notes || 'Нет'}
-
----
-SHVETS PRO - Premium Cleaning`;
-            break;
-            
-        case 'uk':
-            message = `✨ НОВА ЗАЯВКА НА ПРИБИРАННЯ
-
-📋 Послуга: ${bookingData.serviceName}
-🛏️ Спалень: ${bookingData.bedrooms}
-🚿 Ванних: ${bookingData.bathrooms}
-💰 Орієнтовна ціна: $${bookingData.price}
-
-👤 Ім'я: ${formData.name}
-📱 Телефон: ${formData.phone}
-📧 Email: ${formData.email}
-📍 Адреса: ${formData.address}
-📅 Дата: ${formData.date}
-⏰ Час: ${formData.time}
-📝 Примітки: ${formData.notes || 'Немає'}
-
----
-SHVETS PRO - Premium Cleaning`;
-            break;
-            
-        case 'es':
-            message = `✨ NUEVA SOLICITUD DE LIMPIEZA
-
-📋 Servicio: ${bookingData.serviceName}
-🛏️ Habitaciones: ${bookingData.bedrooms}
-🚿 Baños: ${bookingData.bathrooms}
-💰 Precio estimado: $${bookingData.price}
-
-👤 Nombre: ${formData.name}
-📱 Teléfono: ${formData.phone}
-📧 Email: ${formData.email}
-📍 Dirección: ${formData.address}
-📅 Fecha: ${formData.date}
-⏰ Hora: ${formData.time}
-📝 Notas: ${formData.notes || 'Ninguna'}
-
----
-SHVETS PRO - Premium Cleaning`;
-            break;
-            
-        default:
-            message = `✨ NEW CLEANING REQUEST
-
-📋 Service: ${bookingData.serviceName}
-🛏️ Bedrooms: ${bookingData.bedrooms}
-🚿 Bathrooms: ${bookingData.bathrooms}
-💰 Estimated Price: $${bookingData.price}
-
-👤 Name: ${formData.name}
-📱 Phone: ${formData.phone}
-📧 Email: ${formData.email}
-📍 Address: ${formData.address}
-📅 Date: ${formData.date}
-⏰ Time: ${formData.time}
-📝 Notes: ${formData.notes || 'None'}
-
----
-SHVETS PRO - Premium Cleaning`;
-    }
+    const handleBedroomChange = () => {
+        state.bedrooms = parseInt(elements.bedrooms.value) || 3;
+        updateDisplay();
+    };
     
-    return encodeURIComponent(message);
-}
-
-// Format contact message for WhatsApp
-function formatContactMessage(formData) {
-    const lang = localStorage.getItem('shvets-lang') || 'en';
+    const handleBathroomChange = () => {
+        state.bathrooms = parseInt(elements.bathrooms.value) || 2;
+        updateDisplay();
+    };
     
-    let message;
+    const handleAddonChange = (e) => {
+        const checkbox = e.target;
+        const addon = checkbox.dataset.addon;
+        
+        if (checkbox.checked) {
+            if (!state.extras.includes(addon)) {
+                state.extras.push(addon);
+            }
+        } else {
+            state.extras = state.extras.filter(a => a !== addon);
+        }
+        
+        updateDisplay();
+    };
     
-    switch(lang) {
-        case 'ru':
-            message = `📬 ЗАПРОС ЦЕНЫ
-
-👤 Имя: ${formData.name}
-📱 Телефон: ${formData.phone}
-📧 Email: ${formData.email}
-📍 Адрес: ${formData.address}
-📝 Сообщение: ${formData.message || 'Прошу связаться со мной'}
-
----
-SHVETS PRO - Premium Cleaning`;
-            break;
-            
-        case 'uk':
-            message = `📬 ЗАПИТ ЦІНИ
-
-👤 Ім'я: ${formData.name}
-📱 Телефон: ${formData.phone}
-📧 Email: ${formData.email}
-📍 Адреса: ${formData.address}
-📝 Повідомлення: ${formData.message || 'Прошу зв\'язатися зі мною'}
-
----
-SHVETS PRO - Premium Cleaning`;
-            break;
-            
-        case 'es':
-            message = `📬 SOLICITUD DE COTIZACIÓN
-
-👤 Nombre: ${formData.name}
-📱 Teléfono: ${formData.phone}
-📧 Email: ${formData.email}
-📍 Dirección: ${formData.address}
-📝 Mensaje: ${formData.message || 'Por favor contácteme'}
-
----
-SHVETS PRO - Premium Cleaning`;
-            break;
-            
-        default:
-            message = `📬 QUOTE REQUEST
-
-👤 Name: ${formData.name}
-📱 Phone: ${formData.phone}
-📧 Email: ${formData.email}
-📍 Address: ${formData.address}
-📝 Message: ${formData.message || 'Please contact me'}
-
----
-SHVETS PRO - Premium Cleaning`;
-    }
+    // ========================================
+    // BOOKING
+    // ========================================
     
-    return encodeURIComponent(message);
-}
+    const getBookingSummary = () => {
+        const result = calculate();
+        const serviceNames = {
+            standard: 'Standard Cleaning',
+            deep: 'Deep Cleaning',
+            move: 'Move In/Out',
+            airbnb: 'Airbnb Turnover'
+        };
+        const frequencyNames = {
+            once: 'One-Time',
+            monthly: 'Monthly',
+            biweekly: 'Bi-Weekly',
+            weekly: 'Weekly'
+        };
+        
+        return {
+            service: serviceNames[state.service],
+            bedrooms: state.bedrooms,
+            bathrooms: state.bathrooms,
+            frequency: frequencyNames[state.frequency],
+            extras: state.extras,
+            price: result.total,
+            savings: result.savings
+        };
+    };
+    
+    // ========================================
+    // INITIALIZATION
+    // ========================================
+    
+    const bindEvents = () => {
+        // Service options
+        elements.serviceOptions.forEach(btn => {
+            btn.addEventListener('click', handleServiceClick);
+        });
+        
+        // Frequency options
+        elements.frequencyOptions.forEach(btn => {
+            btn.addEventListener('click', handleFrequencyClick);
+        });
+        
+        // Selects
+        if (elements.bedrooms) {
+            elements.bedrooms.addEventListener('change', handleBedroomChange);
+        }
+        if (elements.bathrooms) {
+            elements.bathrooms.addEventListener('change', handleBathroomChange);
+        }
+        
+        // Addons
+        elements.addonCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', handleAddonChange);
+        });
+    };
+    
+    const init = () => {
+        cacheElements();
+        
+        // Check if calculator exists on page
+        if (!elements.totalPrice) {
+            console.log('Calculator not found on page');
+            return;
+        }
+        
+        bindEvents();
+        
+        // Set initial state from DOM
+        const activeService = document.querySelector('#serviceOptions .calc-option.active');
+        if (activeService) state.service = activeService.dataset.value;
+        
+        const activeFrequency = document.querySelector('#frequencyOptions .calc-option.active');
+        if (activeFrequency) state.frequency = activeFrequency.dataset.value;
+        
+        if (elements.bedrooms) state.bedrooms = parseInt(elements.bedrooms.value) || 3;
+        if (elements.bathrooms) state.bathrooms = parseInt(elements.bathrooms.value) || 2;
+        
+        // Initial calculation
+        updateDisplay();
+        
+        console.log('Calculator initialized');
+    };
+    
+    // Public API
+    return {
+        init,
+        getBookingSummary,
+        calculate
+    };
+})();
 
-// Initialize calculator when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupCalculator);
-} else {
-    setupCalculator();
-}
+// Initialize when DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+    Calculator.init();
+});
+
+// Export for global access
+window.Calculator = Calculator;

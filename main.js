@@ -1,83 +1,73 @@
 /**
  * ============================================================================
  * SHVETS PRO - Premium Cleaning Website
- * World-Class JavaScript
- * Version 3.0 - Production Ready
- * ============================================================================
- * 
- * Architecture: Module Pattern with IIFE
- * Performance: Debounced/Throttled Event Handlers
- * Compatibility: ES6+ with Progressive Enhancement
- * 
+ * Version 4.0 - Production Ready
  * ============================================================================
  */
 
 'use strict';
 
-/**
- * ============================================================================
- * 1. PRELOADER
- * ============================================================================
- */
-const Preloader = (() => {
+// ============================================================================
+// 1. PRELOADER - Bulletproof Implementation
+// ============================================================================
+(function() {
     const preloader = document.getElementById('preloader');
+    if (!preloader) return;
     
-    const hide = () => {
-        if (preloader && !preloader.classList.contains('hidden')) {
-            preloader.classList.add('hidden');
-            document.body.style.overflow = '';
-            
-            // Initialize animations after preloader
-            setTimeout(() => Animations.init(), 100);
-        }
+    let hidden = false;
+    
+    const hidePreloader = () => {
+        if (hidden) return;
+        hidden = true;
+        
+        preloader.style.opacity = '0';
+        preloader.style.visibility = 'hidden';
+        preloader.style.pointerEvents = 'none';
+        
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 500);
+        
+        document.body.style.overflow = '';
     };
     
-    const init = () => {
-        if (!preloader) return;
-        
-        // Primary: on window load
-        window.addEventListener('load', () => setTimeout(hide, 1500));
-        
-        // Fallback: after 3 seconds max
-        setTimeout(hide, 3000);
-    };
+    // Method 1: Window load with delay
+    window.addEventListener('load', () => setTimeout(hidePreloader, 1200));
     
-    return { init, hide };
+    // Method 2: DOM ready fallback
+    if (document.readyState === 'complete') {
+        setTimeout(hidePreloader, 500);
+    } else {
+        document.addEventListener('DOMContentLoaded', () => setTimeout(hidePreloader, 2000));
+    }
+    
+    // Method 3: Absolute timeout (always works)
+    setTimeout(hidePreloader, 3000);
 })();
 
-/**
- * ============================================================================
- * 2. NAVIGATION
- * ============================================================================
- */
+// ============================================================================
+// 2. NAVIGATION
+// ============================================================================
 const Navigation = (() => {
     const navbar = document.getElementById('navbar');
     const burger = document.getElementById('navBurger');
     const menu = document.getElementById('navMenu');
-    const links = document.querySelectorAll('.nav-link');
-    
-    let lastScrollY = 0;
     let ticking = false;
     
     const handleScroll = () => {
         const scrollY = window.scrollY;
         
         // Add scrolled class
-        if (scrollY > 50) {
-            navbar?.classList.add('scrolled');
-        } else {
-            navbar?.classList.remove('scrolled');
+        if (navbar) {
+            navbar.classList.toggle('scrolled', scrollY > 50);
         }
         
         // Show/hide scroll to top button
         const scrollTop = document.getElementById('scrollTop');
-        if (scrollY > 500) {
-            scrollTop?.classList.add('visible');
-        } else {
-            scrollTop?.classList.remove('visible');
+        if (scrollTop) {
+            scrollTop.classList.toggle('visible', scrollY > 500);
         }
         
-        lastScrollY = scrollY;
         ticking = false;
     };
     
@@ -106,11 +96,11 @@ const Navigation = (() => {
         burger?.addEventListener('click', toggleMenu);
         
         // Close menu on link click
-        links.forEach(link => {
+        document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', closeMenu);
         });
         
-        // Scroll to top
+        // Scroll to top button
         document.getElementById('scrollTop')?.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
@@ -124,6 +114,7 @@ const Navigation = (() => {
                 const target = document.querySelector(href);
                 if (target) {
                     e.preventDefault();
+                    closeMenu();
                     const offsetTop = target.offsetTop - 80;
                     window.scrollTo({ top: offsetTop, behavior: 'smooth' });
                 }
@@ -134,62 +125,48 @@ const Navigation = (() => {
     return { init };
 })();
 
-/**
- * ============================================================================
- * 3. LANGUAGE SELECTOR
- * ============================================================================
- */
+// ============================================================================
+// 3. LANGUAGE SELECTOR
+// ============================================================================
 const LanguageSelector = (() => {
     const selector = document.getElementById('langSelector');
     const toggle = document.getElementById('langToggle');
     const currentLang = document.getElementById('currentLang');
     const options = document.querySelectorAll('.lang-option');
     
-    const open = () => selector?.classList.add('active');
     const close = () => selector?.classList.remove('active');
     const isOpen = () => selector?.classList.contains('active');
     
     const setLanguage = (lang) => {
-        // Update active state
         options.forEach(opt => {
             opt.classList.toggle('active', opt.dataset.lang === lang);
         });
         
-        // Update display
         if (currentLang) {
             currentLang.textContent = lang.toUpperCase();
         }
         
-        // Apply translations
-        if (typeof window.setLanguage === 'function') {
-            window.setLanguage(lang);
+        // Apply translations if available
+        if (typeof window.applyTranslations === 'function') {
+            window.applyTranslations(lang);
         }
         
-        // Save preference
         localStorage.setItem('shvets-lang', lang);
-        
         close();
     };
     
     const init = () => {
-        // Toggle dropdown
         toggle?.addEventListener('click', (e) => {
             e.stopPropagation();
-            isOpen() ? close() : open();
+            selector?.classList.toggle('active');
         });
         
-        // Language options
         options.forEach(option => {
-            option.addEventListener('click', () => {
-                setLanguage(option.dataset.lang);
-            });
+            option.addEventListener('click', () => setLanguage(option.dataset.lang));
         });
         
-        // Close on outside click
         document.addEventListener('click', (e) => {
-            if (!selector?.contains(e.target)) {
-                close();
-            }
+            if (!selector?.contains(e.target)) close();
         });
         
         // Load saved language
@@ -202,109 +179,102 @@ const LanguageSelector = (() => {
     return { init };
 })();
 
-/**
- * ============================================================================
- * 4. ANIMATIONS
- * ============================================================================
- */
+// ============================================================================
+// 4. ANIMATIONS
+// ============================================================================
 const Animations = (() => {
-    const reveals = document.querySelectorAll('.animate-reveal');
-    
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px 0px -100px 0px',
-        threshold: 0.1
-    };
-    
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, observerOptions);
-    
     const init = () => {
-        reveals.forEach(el => revealObserver.observe(el));
+        const reveals = document.querySelectorAll('.animate-reveal');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            rootMargin: '0px 0px -50px 0px',
+            threshold: 0.1
+        });
+        
+        reveals.forEach(el => observer.observe(el));
+        
+        // Counter animations
         initCounters();
+        
+        // Particles
         initParticles();
     };
     
-    // Counter animation
     const initCounters = () => {
-        const counters = document.querySelectorAll('.stat-number');
+        const counters = document.querySelectorAll('.stat-number[data-count]');
         
-        const counterObserver = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const counter = entry.target;
-                    const target = parseInt(counter.dataset.count) || 0;
-                    animateCounter(counter, target);
-                    counterObserver.unobserve(counter);
+                    const el = entry.target;
+                    const target = parseInt(el.dataset.count) || 0;
+                    animateCounter(el, target);
+                    observer.unobserve(el);
                 }
             });
         }, { threshold: 0.5 });
         
-        counters.forEach(counter => counterObserver.observe(counter));
+        counters.forEach(c => observer.observe(c));
     };
     
-    const animateCounter = (element, target) => {
+    const animateCounter = (el, target) => {
         const duration = 2000;
-        const start = 0;
-        const startTime = performance.now();
+        const start = performance.now();
         
-        const update = (currentTime) => {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
-            const current = Math.floor(start + (target - start) * eased);
-            
-            element.textContent = current.toLocaleString();
+        const update = (time) => {
+            const progress = Math.min((time - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.floor(target * eased).toLocaleString();
             
             if (progress < 1) {
                 requestAnimationFrame(update);
             } else {
-                element.textContent = target.toLocaleString();
+                el.textContent = target.toLocaleString();
             }
         };
         
         requestAnimationFrame(update);
     };
     
-    // Hero particles
     const initParticles = () => {
         const container = document.getElementById('heroParticles');
         if (!container) return;
         
-        const particleCount = window.innerWidth < 768 ? 15 : 30;
+        const count = window.innerWidth < 768 ? 15 : 25;
         
-        for (let i = 0; i < particleCount; i++) {
+        for (let i = 0; i < count; i++) {
             const particle = document.createElement('div');
-            particle.className = 'particle';
+            const size = Math.random() * 4 + 2;
             particle.style.cssText = `
                 position: absolute;
-                width: ${Math.random() * 4 + 2}px;
-                height: ${Math.random() * 4 + 2}px;
-                background: rgba(201, 169, 98, ${Math.random() * 0.5 + 0.2});
+                width: ${size}px;
+                height: ${size}px;
+                background: rgba(201, 169, 98, ${Math.random() * 0.4 + 0.2});
                 border-radius: 50%;
                 left: ${Math.random() * 100}%;
                 top: ${Math.random() * 100}%;
-                animation: particleFloat ${Math.random() * 10 + 10}s linear infinite;
-                animation-delay: ${Math.random() * -10}s;
+                animation: particleDrift ${Math.random() * 15 + 10}s linear infinite;
+                animation-delay: -${Math.random() * 10}s;
             `;
             container.appendChild(particle);
         }
         
-        // Add particle animation
-        if (!document.getElementById('particle-styles')) {
+        // Add keyframes
+        if (!document.getElementById('particle-keyframes')) {
             const style = document.createElement('style');
-            style.id = 'particle-styles';
+            style.id = 'particle-keyframes';
             style.textContent = `
-                @keyframes particleFloat {
-                    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0; }
-                    10% { opacity: 1; }
-                    90% { opacity: 1; }
-                    50% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(1.2); }
+                @keyframes particleDrift {
+                    0% { transform: translateY(0) translateX(0); opacity: 0; }
+                    10% { opacity: 0.8; }
+                    90% { opacity: 0.8; }
+                    100% { transform: translateY(-100px) translateX(50px); opacity: 0; }
                 }
             `;
             document.head.appendChild(style);
@@ -314,41 +284,33 @@ const Animations = (() => {
     return { init };
 })();
 
-/**
- * ============================================================================
- * 5. FAQ ACCORDION
- * ============================================================================
- */
+// ============================================================================
+// 5. FAQ ACCORDION
+// ============================================================================
 const FAQ = (() => {
-    const items = document.querySelectorAll('.faq-item');
-    
-    const toggle = (item) => {
-        const isActive = item.classList.contains('active');
-        
-        // Close all
-        items.forEach(i => i.classList.remove('active'));
-        
-        // Open clicked if wasn't active
-        if (!isActive) {
-            item.classList.add('active');
-        }
-    };
-    
     const init = () => {
-        items.forEach(item => {
+        document.querySelectorAll('.faq-item').forEach(item => {
             const question = item.querySelector('.faq-question');
-            question?.addEventListener('click', () => toggle(item));
+            question?.addEventListener('click', () => {
+                const wasActive = item.classList.contains('active');
+                
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                
+                // Toggle clicked
+                if (!wasActive) {
+                    item.classList.add('active');
+                }
+            });
         });
     };
     
     return { init };
 })();
 
-/**
- * ============================================================================
- * 6. MODAL
- * ============================================================================
- */
+// ============================================================================
+// 6. MODAL
+// ============================================================================
 const Modal = (() => {
     const modal = document.getElementById('bookingModal');
     const closeBtn = document.getElementById('modalClose');
@@ -367,7 +329,6 @@ const Modal = (() => {
     const init = () => {
         closeBtn?.addEventListener('click', close);
         overlay?.addEventListener('click', close);
-        
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') close();
         });
@@ -376,107 +337,119 @@ const Modal = (() => {
     return { init, open, close };
 })();
 
-/**
- * ============================================================================
- * 7. FORMS
- * ============================================================================
- */
-const Forms = (() => {
-    const contactForm = document.getElementById('contactForm');
-    const bookingForm = document.getElementById('bookingForm');
-    
-    const handleContactSubmit = (e) => {
-        e.preventDefault();
-        
-        const formData = new FormData(contactForm);
-        const data = Object.fromEntries(formData);
-        
-        // Build WhatsApp message
-        const message = `
-Hello! I'd like to request a quote.
-
-Name: ${document.getElementById('contactName')?.value || ''}
-Phone: ${document.getElementById('contactPhone')?.value || ''}
-Email: ${document.getElementById('contactEmail')?.value || ''}
-Service: ${document.getElementById('contactService')?.value || ''}
-Message: ${document.getElementById('contactMessage')?.value || ''}
-        `.trim();
-        
-        const whatsappUrl = `https://wa.me/16789376215?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
-    };
-    
-    const handleBookingSubmit = (e) => {
-        e.preventDefault();
-        
-        const message = `
-New Booking Request!
-
-Name: ${document.getElementById('bookName')?.value || ''}
-Phone: ${document.getElementById('bookPhone')?.value || ''}
-Email: ${document.getElementById('bookEmail')?.value || ''}
-Address: ${document.getElementById('bookAddress')?.value || ''}
-Date: ${document.getElementById('bookDate')?.value || ''}
-Time: ${document.getElementById('bookTime')?.value || ''}
-Notes: ${document.getElementById('bookNotes')?.value || ''}
-        `.trim();
-        
-        const whatsappUrl = `https://wa.me/16789376215?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
-        Modal.close();
-    };
-    
+// ============================================================================
+// 7. BOOK NOW BUTTON
+// ============================================================================
+const BookNow = (() => {
     const init = () => {
-        contactForm?.addEventListener('submit', handleContactSubmit);
-        bookingForm?.addEventListener('submit', handleBookingSubmit);
+        const bookBtn = document.getElementById('bookNowBtn');
+        const summary = document.getElementById('bookingSummary');
+        
+        bookBtn?.addEventListener('click', () => {
+            // Get data from calculator if available
+            let summaryText = 'Cleaning Service';
+            
+            if (window.Calculator && typeof window.Calculator.getBookingSummary === 'function') {
+                const data = window.Calculator.getBookingSummary();
+                summaryText = `
+                    <strong>${data.service}</strong><br>
+                    ${data.bedrooms} Bed / ${data.bathrooms} Bath • ${data.frequency}<br>
+                    Estimated: <strong>$${data.price}</strong>
+                `;
+            } else {
+                // Fallback: read from DOM
+                const service = document.querySelector('#serviceOptions .calc-option.active')?.querySelector('span')?.textContent || 'Cleaning';
+                const price = document.getElementById('totalPrice')?.textContent || '$199';
+                summaryText = `<strong>${service}</strong> - ${price}`;
+            }
+            
+            if (summary) {
+                summary.innerHTML = summaryText;
+            }
+            
+            Modal.open();
+        });
     };
     
     return { init };
 })();
 
-/**
- * ============================================================================
- * 8. BOOK NOW BUTTON
- * ============================================================================
- */
-const BookNow = (() => {
-    const bookBtn = document.getElementById('bookNowBtn');
-    const summary = document.getElementById('bookingSummary');
-    
-    const handleClick = () => {
-        // Get calculator values
-        const service = document.querySelector('#serviceOptions .calc-option.active')?.dataset.value || 'standard';
-        const bedrooms = document.getElementById('bedrooms')?.value || '3';
-        const bathrooms = document.getElementById('bathrooms')?.value || '2';
-        const frequency = document.querySelector('#frequencyOptions .calc-option.active')?.dataset.value || 'monthly';
-        const price = document.getElementById('totalPrice')?.textContent || '$199';
+// ============================================================================
+// 8. FORMS
+// ============================================================================
+const Forms = (() => {
+    const createWhatsAppMessage = (formId) => {
+        const form = document.getElementById(formId);
+        if (!form) return '';
         
-        // Update summary
-        if (summary) {
-            summary.innerHTML = `
-                <strong>${service.charAt(0).toUpperCase() + service.slice(1)} Cleaning</strong><br>
-                ${bedrooms} Bed / ${bathrooms} Bath • ${frequency.charAt(0).toUpperCase() + frequency.slice(1)}<br>
-                Estimated: <strong>${price}</strong>
-            `;
+        const fields = {};
+        form.querySelectorAll('input, select, textarea').forEach(el => {
+            if (el.id && el.value) {
+                fields[el.id] = el.value;
+            }
+        });
+        
+        if (formId === 'contactForm') {
+            return `Hello! I'd like to request a quote.
+
+Name: ${fields.contactName || ''}
+Phone: ${fields.contactPhone || ''}
+Email: ${fields.contactEmail || ''}
+Service: ${fields.contactService || ''}
+Message: ${fields.contactMessage || ''}`;
         }
         
-        Modal.open();
+        if (formId === 'bookingForm') {
+            let bookingInfo = '';
+            if (window.Calculator) {
+                const data = window.Calculator.getBookingSummary();
+                bookingInfo = `Service: ${data.service}
+Bedrooms: ${data.bedrooms}
+Bathrooms: ${data.bathrooms}
+Frequency: ${data.frequency}
+Price: $${data.price}`;
+            }
+            
+            return `🏠 NEW BOOKING REQUEST
+
+${bookingInfo}
+
+Name: ${fields.bookName || ''}
+Phone: ${fields.bookPhone || ''}
+Email: ${fields.bookEmail || ''}
+Address: ${fields.bookAddress || ''}
+Date: ${fields.bookDate || ''}
+Time: ${fields.bookTime || ''}
+Notes: ${fields.bookNotes || ''}`;
+        }
+        
+        return '';
     };
     
     const init = () => {
-        bookBtn?.addEventListener('click', handleClick);
+        // Contact form
+        document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const msg = createWhatsAppMessage('contactForm');
+            window.open(`https://wa.me/16789376215?text=${encodeURIComponent(msg)}`, '_blank');
+        });
+        
+        // Booking form
+        document.getElementById('bookingForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const msg = createWhatsAppMessage('bookingForm');
+            window.open(`https://wa.me/16789376215?text=${encodeURIComponent(msg)}`, '_blank');
+            Modal.close();
+        });
     };
     
     return { init };
 })();
 
-/**
- * ============================================================================
- * 9. INITIALIZATION
- * ============================================================================
- */
+// ============================================================================
+// 9. INITIALIZATION
+// ============================================================================
 document.addEventListener('DOMContentLoaded', () => {
-    Preloader.init();
     Navigation.init();
     LanguageSelector.init();
     FAQ.init();
@@ -484,8 +457,8 @@ document.addEventListener('DOMContentLoaded', () => {
     Forms.init();
     BookNow.init();
     
-    console.log('%c SHVETS PRO ', 'background: #C9A962; color: #0D0D0D; font-size: 14px; font-weight: bold; padding: 4px 8px; border-radius: 4px;', 'Premium Cleaning Website Loaded');
+    // Animations after short delay
+    setTimeout(() => Animations.init(), 500);
+    
+    console.log('%c SHVETS PRO ', 'background: #C9A962; color: #0D0D0D; font-size: 14px; font-weight: bold; padding: 4px 8px; border-radius: 4px;', 'Website Loaded Successfully');
 });
-
-// Global function for language system
-window.setLanguage = window.setLanguage || function() {};
