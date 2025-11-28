@@ -749,5 +749,32 @@
         <button class="fab-btn fab-top" id="scrollTop" aria-label="Scroll to top"><i class="fas fa-chevron-up"></i></button>
     </div>
 
-    <!-- Preloader fallback -->
-    <script data-cfasync="false" src="/cdn-cgi/scrip
+    <!-- Preloader fallback - AGGRESSIVE -->
+    <script>
+    (function(){
+        var hide = function(){
+            var p = document.getElementById('preloader');
+            if(p && p.style.display !== 'none'){
+                p.style.transition = 'opacity 0.3s';
+                p.style.opacity = '0';
+                setTimeout(function(){ 
+                    p.style.display = 'none';
+                    p.style.visibility = 'hidden';
+                    document.body.style.overflow = '';
+                }, 300);
+            }
+        };
+        setTimeout(hide, 1500);
+        setTimeout(hide, 2500);
+        setTimeout(hide, 4000);
+        window.addEventListener('load', function(){ setTimeout(hide, 800); });
+        document.addEventListener('DOMContentLoaded', function(){ setTimeout(hide, 1200); });
+        document.addEventListener('click', hide);
+    })();
+    </script>
+    
+    <script src="translations.js"></script>
+    <script src="calculator.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
