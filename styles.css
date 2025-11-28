@@ -1418,11 +1418,15 @@ h1, h2, h3, h4, h5, h6 {
     font-size: var(--text-sm);
     color: var(--gray-600);
     transition: var(--transition);
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .area-tag:hover {
     border-color: var(--gold);
     color: var(--gold-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .area-tag.primary {
@@ -1430,6 +1434,13 @@ h1, h2, h3, h4, h5, h6 {
     border-color: var(--gold);
     color: var(--black);
     font-weight: 600;
+}
+
+.area-tag.primary:hover {
+    background: var(--gold-dark);
+    border-color: var(--gold-dark);
+    color: var(--white);
+    box-shadow: var(--shadow-gold);
 }
 
 .area-tag i {
