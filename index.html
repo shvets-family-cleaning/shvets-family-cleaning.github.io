@@ -25,12 +25,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230D0D0D' width='100' height='100' rx='16'/><text y='.68em' x='50' text-anchor='middle' font-family='serif' font-size='52' fill='%23C9A962' font-weight='600'>SP</text></svg>">
+    
     
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Q9V1PD58E"></script>
-    <script>
+    <script async defer src="https://www.googletagmanager.com/gtag/js?id=G-3Q9V1PD58E"></script>
+    <script defer>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
@@ -141,12 +142,13 @@
             </a>
             
             <ul class="nav-menu" id="navMenu">
-                <li><a href="#services" class="nav-link">Services</a></li>
-                <li><a href="#calculator" class="nav-link">Get Quote</a></li>
-                <li><a href="#areas" class="nav-link">Areas</a></li>
+                <li><a href="#services" class="nav-link" data-i18n="nav.services">Services</a></li>
+                <li><a href="#calculator" class="nav-link" data-i18n="nav.pricing">Get Quote</a></li>
+                <li><a href="#areas" class="nav-link" data-i18n="nav.areas">Areas</a></li>
                 <li><a href="blog.html" class="nav-link">Blog</a></li>
-                <li><a href="#reviews" class="nav-link">Reviews</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#reviews" class="nav-link" data-i18n="nav.reviews">Reviews</a></li>
+                <li><a href="#contact" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+                <li><a href="#" class="nav-link calendly-btn" data-i18n="contact.schedule">Schedule a Call</a></li>
             </ul>
             
             <div class="nav-actions">
@@ -176,30 +178,31 @@
         <div class="hero-content">
             <div class="hero-badge animate-reveal">
                 <div class="badge-icon"><i class="fas fa-award"></i></div>
-                <span>Premium Cleaning Service in North Atlanta</span>
+                <span data-i18n="hero.badge">Premium Cleaning Service in North Atlanta</span>
                 <div class="badge-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
             </div>
             
             <!-- SEO-OPTIMIZED H1 -->
             <h1 class="hero-title animate-reveal delay-1">
-                <span class="title-line-1">Professional House Cleaning</span>
-                <span class="title-line-2 text-gradient">in Alpharetta, GA</span>
+                <span class="title-line-1" data-i18n="hero.title1">Professional House Cleaning</span>
+                <span class="title-line-2 text-gradient" data-i18n="hero.title2">in Alpharetta, GA</span>
             </h1>
             
-            <p class="hero-subtitle animate-reveal delay-2">
+            <p class="hero-subtitle animate-reveal delay-2" data-i18n="hero.subtitle">
                 Deep cleaning, move-out cleaning, Airbnb turnover. Licensed, insured, background-checked cleaners. 
                 <strong>100% Satisfaction Guaranteed.</strong>
             </p>
             
             <div class="hero-features animate-reveal delay-3">
-                <div class="hero-feature"><i class="fas fa-shield-alt"></i><span>Fully Insured & Bonded</span></div>
-                <div class="hero-feature"><i class="fas fa-user-check"></i><span>Background Checked</span></div>
-                <div class="hero-feature"><i class="fas fa-redo"></i><span>100% Guarantee</span></div>
+                <div class="hero-feature"><i class="fas fa-shield-alt"></i><span data-i18n="hero.feature1">Fully Insured & Bonded</span></div>
+                <div class="hero-feature"><i class="fas fa-user-check"></i><span data-i18n="hero.feature2">Background Checked</span></div>
+                <div class="hero-feature"><i class="fas fa-redo"></i><span data-i18n="hero.feature3">100% Guarantee</span></div>
             </div>
             
             <div class="hero-cta animate-reveal delay-4">
-                <a href="#calculator" class="btn btn-gold btn-xl"><span>Get Instant Quote</span><i class="fas fa-arrow-right"></i></a>
-                <a href="tel:+16789376215" class="btn btn-outline btn-xl"><i class="fas fa-phone-alt"></i><span>(678) 937-6215</span></a>
+                <a href="#calculator" class="btn btn-gold btn-xl"><span data-i18n="hero.cta1">Get Instant Quote</span><i class="fas fa-arrow-right"></i></a>
+                <a href="https://wa.me/16789376215" class="btn btn-outline btn-xl" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i><span data-i18n="hero.cta2">WhatsApp Us</span></a>
+                <a href="#" class="btn btn-outline btn-xl calendly-btn"><i class="fas fa-calendar-alt"></i><span data-i18n="contact.schedule">Schedule a Call</span></a>
             </div>
             
             <!-- TRUST BADGES - Critical for US market -->
@@ -280,65 +283,65 @@
     <section class="section section-light" id="services">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag animate-reveal">Our Services</span>
-                <h2 class="section-title animate-reveal delay-1">Cleaning Services in North Atlanta</h2>
-                <p class="section-subtitle animate-reveal delay-2">From regular maintenance to deep restoration</p>
+                <span class="section-tag animate-reveal" data-i18n="services.tag">Our Services</span>
+                <h2 class="section-title animate-reveal delay-1" data-i18n="services.title">Cleaning Services in North Atlanta</h2>
+                <p class="section-subtitle animate-reveal delay-2" data-i18n="services.subtitle">From regular maintenance to deep restoration</p>
             </div>
             
             <div class="services-grid">
                 <div class="service-card animate-reveal">
                     <div class="service-icon"><i class="fas fa-home"></i></div>
-                    <div class="service-badge">Popular</div>
-                    <h3 class="service-title">Standard Cleaning</h3>
-                    <p class="service-desc">Regular maintenance to keep your home fresh and tidy.</p>
+                    <div class="service-badge" data-i18n="services.popular">Popular</div>
+                    <h3 class="service-title" data-i18n="services.standard.title">Standard Cleaning</h3>
+                    <p class="service-desc" data-i18n="services.standard.desc">Regular maintenance to keep your home fresh and tidy.</p>
                     <ul class="service-features">
-                        <li><i class="fas fa-check"></i><span>All rooms dusted & vacuumed</span></li>
-                        <li><i class="fas fa-check"></i><span>Kitchen & bathrooms sanitized</span></li>
-                        <li><i class="fas fa-check"></i><span>Floors mopped</span></li>
+                        <li><i class="fas fa-check"></i><span data-i18n="services.standard.f1">All rooms dusted & vacuumed</span></li>
+                        <li><i class="fas fa-check"></i><span data-i18n="services.standard.f2">Kitchen & bathrooms sanitized</span></li>
+                        <li><i class="fas fa-check"></i><span data-i18n="services.standard.f3">Floors mopped</span></li>
                     </ul>
-                    <div class="service-price"><span class="price-from">From</span><span class="price-amount">$139</span></div>
-                    <a href="#calculator" class="btn btn-dark btn-block">Get Quote</a>
+                    <div class="service-price"><span class="price-from" data-i18n="services.from">From</span><span class="price-amount">$139</span></div>
+                    <a href="#calculator" class="btn btn-dark btn-block" data-i18n="services.book">Get Quote</a>
                 </div>
                 
                 <div class="service-card featured animate-reveal delay-1">
                     <div class="service-icon"><i class="fas fa-sparkles"></i></div>
-                    <div class="service-badge gold">Best Value</div>
-                    <h3 class="service-title">Deep Cleaning</h3>
-                    <p class="service-desc">Comprehensive cleaning that reaches every corner.</p>
+                    <div class="service-badge gold" data-i18n="services.thorough">Best Value</div>
+                    <h3 class="service-title" data-i18n="services.deep.title">Deep Cleaning</h3>
+                    <p class="service-desc" data-i18n="services.deep.desc">Comprehensive cleaning that reaches every corner.</p>
                     <ul class="service-features">
-                        <li><i class="fas fa-check"></i><span>Everything in Standard +</span></li>
-                        <li><i class="fas fa-check"></i><span>Inside appliances</span></li>
-                        <li><i class="fas fa-check"></i><span>Baseboards & door frames</span></li>
-                        <li><i class="fas fa-check"></i><span>Light fixtures & ceiling fans</span></li>
+                        <li><i class="fas fa-check"></i><span data-i18n="services.deep.f1">Everything in Standard +</span></li>
+                        <li><i class="fas fa-check"></i><span data-i18n="services.deep.f2">Inside appliances</span></li>
+                        <li><i class="fas fa-check"></i><span data-i18n="services.deep.f3">Baseboards & door frames</span></li>
+                        <li><i class="fas fa-check"></i><span data-i18n="services.deep.f4">Light fixtures & ceiling fans</span></li>
                     </ul>
-                    <div class="service-price"><span class="price-from">From</span><span class="price-amount">$219</span></div>
-                    <a href="#calculator" class="btn btn-gold btn-block">Get Quote</a>
+                    <div class="service-price"><span class="price-from" data-i18n="services.from">From</span><span class="price-amount">$219</span></div>
+                    <a href="#calculator" class="btn btn-gold btn-block" data-i18n="services.book">Get Quote</a>
                 </div>
                 
                 <div class="service-card animate-reveal delay-2">
                     <div class="service-icon"><i class="fas fa-truck-moving"></i></div>
-                    <h3 class="service-title">Move In/Out Cleaning</h3>
-                    <p class="service-desc">Get your full deposit back or impress new tenants.</p>
+                    <h3 class="service-title" data-i18n="services.move.title">Move In/Out Cleaning</h3>
+                    <p class="service-desc" data-i18n="services.move.desc">Get your full deposit back or impress new tenants.</p>
                     <ul class="service-features">
-                        <li><i class="fas fa-check"></i><span>Everything in Deep Clean +</span></li>
-                        <li><i class="fas fa-check"></i><span>Inside all cabinets & closets</span></li>
-                        <li><i class="fas fa-check"></i><span>Window tracks & sills</span></li>
+                        <li><i class="fas fa-check"></i><span data-i18n="services.move.f1">Everything in Deep Clean +</span></li>
+                        <li><i class="fas fa-check"></i><span data-i18n="services.move.f2">Inside all cabinets & closets</span></li>
+                        <li><i class="fas fa-check"></i><span data-i18n="services.move.f3">Window tracks & sills</span></li>
                     </ul>
-                    <div class="service-price"><span class="price-from">From</span><span class="price-amount">$289</span></div>
-                    <a href="#calculator" class="btn btn-dark btn-block">Get Quote</a>
+                    <div class="service-price"><span class="price-from" data-i18n="services.from">From</span><span class="price-amount">$289</span></div>
+                    <a href="#calculator" class="btn btn-dark btn-block" data-i18n="services.book">Get Quote</a>
                 </div>
                 
                 <div class="service-card animate-reveal delay-3">
                     <div class="service-icon"><i class="fab fa-airbnb"></i></div>
-                    <h3 class="service-title">Airbnb Turnover</h3>
-                    <p class="service-desc">Quick, thorough turnovers for 5-star reviews.</p>
+                    <h3 class="service-title" data-i18n="services.airbnb.title">Airbnb Turnover</h3>
+                    <p class="service-desc" data-i18n="services.airbnb.desc">Quick, thorough turnovers for 5-star reviews.</p>
                     <ul class="service-features">
-                        <li><i class="fas fa-check"></i><span>Full property cleaned</span></li>
-                        <li><i class="fas fa-check"></i><span>Linens changed & staged</span></li>
-                        <li><i class="fas fa-check"></i><span>Photo-ready presentation</span></li>
+                        <li><i class="fas fa-check"></i><span data-i18n="services.airbnb.f1">Full property cleaned</span></li>
+                        <li><i class="fas fa-check"></i><span data-i18n="services.airbnb.f2">Linens changed & staged</span></li>
+                        <li><i class="fas fa-check"></i><span data-i18n="services.airbnb.f3">Photo-ready presentation</span></li>
                     </ul>
-                    <div class="service-price"><span class="price-from">From</span><span class="price-amount">$119</span></div>
-                    <a href="#calculator" class="btn btn-dark btn-block">Get Quote</a>
+                    <div class="service-price"><span class="price-from" data-i18n="services.from">From</span><span class="price-amount">$119</span></div>
+                    <a href="#calculator" class="btn btn-dark btn-block" data-i18n="services.book">Get Quote</a>
                 </div>
             </div>
             
@@ -346,10 +349,10 @@
             <div class="section-cta animate-reveal">
                 <div class="cta-box">
                     <div class="cta-content">
-                        <h3>Ready to Book?</h3>
-                        <p>Get an instant quote in 30 seconds. No obligation.</p>
+                        <h3 data-i18n="calc.title">Ready to Book?</h3>
+                        <p data-i18n="calc.subtitle">Get an instant quote in 30 seconds. No obligation.</p>
                     </div>
-                    <a href="#calculator" class="btn btn-gold btn-xl"><i class="fas fa-calculator"></i> Calculate Price</a>
+                    <a href="#calculator" class="btn btn-gold btn-xl" data-i18n="hero.cta1"><i class="fas fa-calculator"></i> Calculate Price</a>
                 </div>
             </div>
         </div>
@@ -360,22 +363,22 @@
         <div class="container">
             <div class="calc-wrapper">
                 <div class="calc-info animate-reveal">
-                    <span class="section-tag">Instant Quote</span>
-                    <h2 class="section-title">Calculate Your Price</h2>
-                    <p class="calc-desc">Transparent pricing. No hidden fees. Know exactly what you'll pay before booking.</p>
+                    <span class="section-tag" data-i18n="calc.tag">Instant Quote</span>
+                    <h2 class="section-title" data-i18n="calc.title">Calculate Your Price</h2>
+                    <p class="calc-desc" data-i18n="calc.subtitle">Transparent pricing. No hidden fees. Know exactly what you'll pay before booking.</p>
                     
                     <div class="calc-benefits">
                         <div class="calc-benefit">
                             <div class="benefit-icon"><i class="fas fa-lock"></i></div>
-                            <div class="benefit-text"><strong>Fixed Pricing</strong><span>No hourly surprises</span></div>
+                            <div class="benefit-text"><strong data-i18n="calc.b1.title">Fixed Pricing</strong><span data-i18n="calc.b1.desc">No hourly surprises</span></div>
                         </div>
                         <div class="calc-benefit">
                             <div class="benefit-icon"><i class="fas fa-percent"></i></div>
-                            <div class="benefit-text"><strong>15% Off First Clean</strong><span>Code: FIRST15</span></div>
+                            <div class="benefit-text"><strong data-i18n="calc.b2.title">15% Off First Clean</strong><span data-i18n="calc.b2.desc">Code: FIRST15</span></div>
                         </div>
                         <div class="calc-benefit">
                             <div class="benefit-icon"><i class="fas fa-redo"></i></div>
-                            <div class="benefit-text"><strong>Recurring Discounts</strong><span>Save up to 20%</span></div>
+                            <div class="benefit-text"><strong data-i18n="calc.b3.title">Recurring Discounts</strong><span data-i18n="calc.b3.desc">Save up to 20%</span></div>
                         </div>
                     </div>
                     
@@ -393,28 +396,28 @@
                 
                 <div class="calc-card animate-reveal delay-2">
                     <div class="calc-header">
-                        <h3>Get Your Quote</h3>
-                        <p>Customize your cleaning service</p>
+                        <h3 data-i18n="calc.header">Get Your Quote</h3>
+                        <p data-i18n="calc.subtitle">Customize your cleaning service</p>
                     </div>
                     
                     <form id="calculatorForm" class="calc-form">
                         <div class="calc-group">
-                            <label>Service Type</label>
+                            <label data-i18n="calc.service">Service Type</label>
                             <div class="calc-options" id="serviceOptions">
-                                <button type="button" class="calc-option active" data-value="standard"><i class="fas fa-home"></i><span>Standard</span></button>
-                                <button type="button" class="calc-option" data-value="deep"><i class="fas fa-sparkles"></i><span>Deep Clean</span></button>
-                                <button type="button" class="calc-option" data-value="move"><i class="fas fa-truck-moving"></i><span>Move In/Out</span></button>
-                                <button type="button" class="calc-option" data-value="airbnb"><i class="fab fa-airbnb"></i><span>Airbnb</span></button>
+                                <button type="button" class="calc-option active" data-value="standard"><i class="fas fa-home"></i><span data-i18n="calc.standard">Standard</span></button>
+                                <button type="button" class="calc-option" data-value="deep"><i class="fas fa-sparkles"></i><span data-i18n="calc.deep">Deep Clean</span></button>
+                                <button type="button" class="calc-option" data-value="move"><i class="fas fa-truck-moving"></i><span data-i18n="calc.move">Move In/Out</span></button>
+                                <button type="button" class="calc-option" data-value="airbnb"><i class="fab fa-airbnb"></i><span data-i18n="calc.airbnb">Airbnb</span></button>
                             </div>
                         </div>
                         
                         <div class="calc-group">
-                            <label>Home Size</label>
+                            <label data-i18n="calc.details">Home Size</label>
                             <div class="calc-row">
                                 <div class="calc-field">
                                     <span class="field-icon"><i class="fas fa-bed"></i></span>
                                     <select id="bedrooms" class="calc-select">
-                                        <option value="1">1 Bedroom</option>
+                                        <option value="1" data-i18n="calc.sqft1">1 Bedroom</option>
                                         <option value="2">2 Bedrooms</option>
                                         <option value="3" selected>3 Bedrooms</option>
                                         <option value="4">4 Bedrooms</option>
@@ -436,32 +439,32 @@
                         </div>
                         
                         <div class="calc-group">
-                            <label>Frequency</label>
+                            <label data-i18n="calc.frequency">Frequency</label>
                             <div class="calc-options small" id="frequencyOptions">
-                                <button type="button" class="calc-option" data-value="once"><span>One-Time</span></button>
-                                <button type="button" class="calc-option" data-value="weekly"><span>Weekly</span><small>-20%</small></button>
-                                <button type="button" class="calc-option" data-value="biweekly"><span>Bi-Weekly</span><small>-15%</small></button>
-                                <button type="button" class="calc-option active" data-value="monthly"><span>Monthly</span><small>-10%</small></button>
+                                <button type="button" class="calc-option" data-value="once"><span data-i18n="calc.once">One-Time</span></button>
+                                <button type="button" class="calc-option" data-value="weekly"><span data-i18n="calc.weekly">Weekly</span><small>-20%</small></button>
+                                <button type="button" class="calc-option" data-value="biweekly"><span data-i18n="calc.biweekly">Bi-Weekly</span><small>-15%</small></button>
+                                <button type="button" class="calc-option active" data-value="monthly"><span data-i18n="calc.monthly">Monthly</span><small>-10%</small></button>
                             </div>
                         </div>
                         
                         <div class="calc-group">
-                            <label>Add-Ons</label>
+                            <label data-i18n="calc.extras">Add-Ons</label>
                             <div class="calc-addons" id="addonOptions">
-                                <label class="addon-check"><input type="checkbox" data-addon="fridge" data-price="35"><span class="checkmark"></span><span class="addon-name">Inside Fridge</span><span class="addon-price">+$35</span></label>
-                                <label class="addon-check"><input type="checkbox" data-addon="oven" data-price="35"><span class="checkmark"></span><span class="addon-name">Inside Oven</span><span class="addon-price">+$35</span></label>
-                                <label class="addon-check"><input type="checkbox" data-addon="windows" data-price="50"><span class="checkmark"></span><span class="addon-name">Windows</span><span class="addon-price">+$50</span></label>
-                                <label class="addon-check"><input type="checkbox" data-addon="laundry" data-price="25"><span class="checkmark"></span><span class="addon-name">Laundry</span><span class="addon-price">+$25</span></label>
+                                <label class="addon-check"><input type="checkbox" data-addon="fridge" data-price="35"><span class="checkmark"></span><span class="addon-name" data-i18n="calc.extra.fridge">Inside Fridge</span><span class="addon-price">+$35</span></label>
+                                <label class="addon-check"><input type="checkbox" data-addon="oven" data-price="35"><span class="checkmark"></span><span class="addon-name" data-i18n="calc.extra.oven">Inside Oven</span><span class="addon-price">+$35</span></label>
+                                <label class="addon-check"><input type="checkbox" data-addon="windows" data-price="50"><span class="checkmark"></span><span class="addon-name" data-i18n="calc.extra.windows">Windows</span><span class="addon-price">+$50</span></label>
+                                <label class="addon-check"><input type="checkbox" data-addon="laundry" data-price="25"><span class="checkmark"></span><span class="addon-name" data-i18n="calc.extra.laundry">Laundry</span><span class="addon-price">+$25</span></label>
                             </div>
                         </div>
                         
                         <div class="calc-result">
-                            <div class="result-row"><span>Estimated Price</span><span class="result-price" id="totalPrice">$189</span></div>
-                            <div class="result-discount" id="discountInfo"><i class="fas fa-tag"></i><span>You're saving</span><strong id="savingsAmount">$21</strong><span>with monthly plan!</span></div>
+                            <div class="result-row"><span data-i18n="calc.total">Estimated Price</span><span class="result-price" id="totalPrice">$189</span></div>
+                            <div class="result-discount" id="discountInfo"><i class="fas fa-tag"></i><span data-i18n="calc.savings">You're saving</span><strong id="savingsAmount">$21</strong><span data-i18n="calc.discount.note">with monthly plan!</span></div>
                         </div>
                         
-                        <button type="button" class="btn btn-gold btn-block btn-xl" id="bookNowBtn"><span>Book This Cleaning</span><i class="fas fa-arrow-right"></i></button>
-                        <p class="calc-note">Final price confirmed after walkthrough. Usually within $20 of estimate.</p>
+                        <button type="button" class="btn btn-gold btn-block btn-xl" id="bookNowBtn"><span data-i18n="calc.book">Book This Cleaning</span><i class="fas fa-arrow-right"></i></button>
+                        <p class="calc-note" data-i18n="calc.note">Final price confirmed after walkthrough. Usually within $20 of estimate.</p>
                     </form>
                 </div>
             </div>
@@ -478,11 +481,11 @@
             </div>
             
             <div class="areas-content">
-                <div class="areas-map animate-reveal">
-                    <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d212000!2d-84.45!3d34.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1700000000000" style="border:0;" allowfullscreen="" loading="lazy" title="Service Area Map - North Atlanta"></iframe>
-                    </div>
-                </div>
+                        <div class="areas-map animate-reveal">
+                            <div class="map-container">
+                                <iframe src="https://www.google.com/maps?q=Alpharetta%2C%20GA&output=embed" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Service Area Map - North Atlanta"></iframe>
+                            </div>
+                        </div>
                 
                 <div class="areas-list animate-reveal delay-2">
                     <div class="areas-group">
@@ -657,14 +660,15 @@
         <div class="container">
             <div class="contact-grid">
                 <div class="contact-info animate-reveal">
-                    <span class="section-tag">Get in Touch</span>
-                    <h2 class="section-title">Ready to Book?</h2>
-                    <p class="contact-desc">Contact us for a free quote. We respond within 1 hour during business hours.</p>
+                    <span class="section-tag" data-i18n="contact.tag">Get in Touch</span>
+                    <h2 class="section-title" data-i18n="contact.title">Ready to Book?</h2>
+                    <p class="contact-desc" data-i18n="contact.text">Contact us for a free quote. We respond within 1 hour during business hours.</p>
                     
                     <div class="contact-methods">
-                        <a href="tel:+16789376215" class="contact-method"><div class="method-icon"><i class="fas fa-phone-alt"></i></div><div class="method-info"><strong>Call Us</strong><span>(678) 937-6215</span></div></a>
-                        <a href="https://wa.me/16789376215" class="contact-method" target="_blank" rel="noopener"><div class="method-icon whatsapp"><i class="fab fa-whatsapp"></i></div><div class="method-info"><strong>WhatsApp</strong><span>Quick Response</span></div></a>
-                        <a href="/cdn-cgi/l/email-protection#a8dbc0decddcdbd8dac7e8cfc5c9c1c486cbc7c5" class="contact-method"><div class="method-icon"><i class="fas fa-envelope"></i></div><div class="method-info"><strong>Email</strong><span><span class="__cf_email__" data-cfemail="7c0f140a19080f0c0e133c1b111d1510521f1311">[email&#160;protected]</span></span></div></a>
+                        <a href="tel:+16789376215" class="contact-method"><div class="method-icon"><i class="fas fa-phone-alt"></i></div><div class="method-info"><strong data-i18n="contact.phone">Call Us</strong><span>(678) 937-6215</span></div></a>
+                        <a href="https://wa.me/16789376215" class="contact-method" target="_blank" rel="noopener"><div class="method-icon whatsapp"><i class="fab fa-whatsapp"></i></div><div class="method-info"><strong data-i18n="contact.whatsapp">WhatsApp</strong><span data-i18n="contact.whatsapp.fast">Quick Response</span></div></a>
+                        <a href="/cdn-cgi/l/email-protection#a8dbc0decddcdbd8dac7e8cfc5c9c1c486cbc7c5" class="contact-method"><div class="method-icon"><i class="fas fa-envelope"></i></div><div class="method-info"><strong data-i18n="contact.email">Email</strong><span><span class="__cf_email__" data-cfemail="7c0f140a19080f0c0e133c1b111d1510521f1311">[email&#160;protected]</span></span></div></a>
+                        <a href="#" class="contact-method calendly-btn"><div class="method-icon"><i class="fas fa-calendar-alt"></i></div><div class="method-info"><strong data-i18n="contact.schedule">Schedule a Call</strong><span>Calendly</span></div></a>
                     </div>
                     
                     <div class="contact-hours">
@@ -679,15 +683,15 @@
                 
                 <div class="contact-form-wrapper animate-reveal delay-2">
                     <form class="contact-form" id="contactForm">
-                        <h3>Request a Quote</h3>
+                        <h3 data-i18n="contact.form.title">Request a Quote</h3>
                         <div class="form-row">
-                            <div class="form-group"><label for="contactName">Name *</label><input type="text" id="contactName" class="form-input" required></div>
-                            <div class="form-group"><label for="contactPhone">Phone *</label><input type="tel" id="contactPhone" class="form-input" required></div>
+                            <div class="form-group"><label for="contactName" data-i18n="contact.form.name">Name *</label><input type="text" id="contactName" class="form-input" required></div>
+                            <div class="form-group"><label for="contactPhone" data-i18n="contact.form.phone">Phone *</label><input type="tel" id="contactPhone" class="form-input" required></div>
                         </div>
-                        <div class="form-group"><label for="contactEmail">Email</label><input type="email" id="contactEmail" class="form-input"></div>
-                        <div class="form-group"><label for="contactService">Service</label><select id="contactService" class="form-input"><option value="standard">Standard Cleaning</option><option value="deep">Deep Cleaning</option><option value="move">Move In/Out</option><option value="airbnb">Airbnb Turnover</option></select></div>
-                        <div class="form-group"><label for="contactMessage">Message</label><textarea id="contactMessage" class="form-input" rows="4" placeholder="Tell us about your home and any special requests..."></textarea></div>
-                        <button type="submit" class="btn btn-gold btn-block btn-xl"><span>Send Request</span><i class="fas fa-paper-plane"></i></button>
+                        <div class="form-group"><label for="contactEmail" data-i18n="contact.form.email">Email</label><input type="email" id="contactEmail" class="form-input"></div>
+                        <div class="form-group"><label for="contactService" data-i18n="contact.service">Service</label><select id="contactService" class="form-input"><option value="standard" data-i18n="services.standard.title">Standard Cleaning</option><option value="deep" data-i18n="services.deep.title">Deep Cleaning</option><option value="move" data-i18n="services.move.title">Move In/Out</option><option value="airbnb" data-i18n="services.airbnb.title">Airbnb Turnover</option></select></div>
+                        <div class="form-group"><label for="contactMessage" data-i18n="contact.form.message">Message</label><textarea id="contactMessage" class="form-input" rows="4" placeholder="Tell us about your home and any special requests..."></textarea></div>
+                        <button type="submit" class="btn btn-gold btn-block btn-xl"><span data-i18n="contact.form.submit">Send Request</span><i class="fas fa-paper-plane"></i></button>
                     </form>
                 </div>
             </div>
@@ -750,30 +754,7 @@
         <button class="fab-btn fab-top" id="scrollTop" aria-label="Scroll to top"><i class="fas fa-chevron-up"></i></button>
     </div>
 
-    <!-- Preloader fallback - AGGRESSIVE -->
-    <script>
-    (function(){
-        var hide = function(){
-            var p = document.getElementById('preloader');
-            if(p && p.style.display !== 'none'){
-                p.style.transition = 'opacity 0.3s';
-                p.style.opacity = '0';
-                setTimeout(function(){ 
-                    p.style.display = 'none';
-                    p.style.visibility = 'hidden';
-                    document.body.style.overflow = '';
-                }, 300);
-            }
-        };
-        setTimeout(hide, 1500);
-        setTimeout(hide, 2500);
-        setTimeout(hide, 4000);
-        window.addEventListener('load', function(){ setTimeout(hide, 800); });
-        document.addEventListener('DOMContentLoaded', function(){ setTimeout(hide, 1200); });
-        document.addEventListener('click', hide);
-    })();
-    </script>
-    
+    <script defer src="https://assets.calendly.com/assets/external/widget.js"></script>
     <script src="translations.js"></script>
     <script src="calculator.js"></script>
     <script src="main.js"></script>

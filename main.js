@@ -20,29 +20,23 @@
         if (hidden) return;
         hidden = true;
         
+        preloader.style.transition = 'opacity 300ms ease, visibility 300ms ease';
         preloader.style.opacity = '0';
         preloader.style.visibility = 'hidden';
         preloader.style.pointerEvents = 'none';
         
         setTimeout(() => {
             preloader.style.display = 'none';
-        }, 500);
+        }, 320);
         
         document.body.style.overflow = '';
     };
     
-    // Method 1: Window load with delay
-    window.addEventListener('load', () => setTimeout(hidePreloader, 1200));
+    // Window load hides ASAP
+    window.addEventListener('load', () => setTimeout(hidePreloader, 400));
     
-    // Method 2: DOM ready fallback
-    if (document.readyState === 'complete') {
-        setTimeout(hidePreloader, 500);
-    } else {
-        document.addEventListener('DOMContentLoaded', () => setTimeout(hidePreloader, 2000));
-    }
-    
-    // Method 3: Absolute timeout (always works)
-    setTimeout(hidePreloader, 3000);
+    // Single safety timeout in case load never fires
+    setTimeout(hidePreloader, 2000);
 })();
 
 // ============================================================================
@@ -149,6 +143,8 @@ const LanguageSelector = (() => {
         // Apply translations if available
         if (typeof window.applyTranslations === 'function') {
             window.applyTranslations(lang);
+        } else if (typeof window.setLanguage === 'function') {
+            window.setLanguage(lang);
         }
         
         localStorage.setItem('shvets-lang', lang);
@@ -440,6 +436,19 @@ Notes: ${fields.bookNotes || ''}`;
             const msg = createWhatsAppMessage('bookingForm');
             window.open(`https://wa.me/16789376215?text=${encodeURIComponent(msg)}`, '_blank');
             Modal.close();
+        });
+
+        // Calendly popup triggers
+        document.querySelectorAll('.calendly-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const calendlyUrl = 'https://calendly.com/e79e79/30min';
+                if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
+                    window.Calendly.initPopupWidget({ url: calendlyUrl });
+                } else {
+                    window.open(calendlyUrl, '_blank');
+                }
+            });
         });
     };
     

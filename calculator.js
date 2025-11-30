@@ -73,22 +73,20 @@ const Calculator = (() => {
     const calculate = () => {
         const pricing = prices[state.service] || prices.standard;
         
-        // Base calculation
-        let subtotal = pricing.base;
-        subtotal += (state.bedrooms - 1) * pricing.bedroom;
-        subtotal += (state.bathrooms - 1) * pricing.bathroom;
+        // Base calculation (eligible for frequency discount)
+        const baseSubtotal = pricing.base +
+            (state.bedrooms - 1) * pricing.bedroom +
+            (state.bathrooms - 1) * pricing.bathroom;
         
-        // Add extras
-        state.extras.forEach(addon => {
-            subtotal += addons[addon] || 0;
-        });
+        // Extras are NOT discounted
+        const extrasSubtotal = state.extras.reduce((sum, addon) => sum + (addons[addon] || 0), 0);
         
-        // Calculate discount
         const discountPercent = discounts[state.frequency] || 0;
-        const savings = Math.round(subtotal * discountPercent);
-        const total = subtotal - savings;
+        const savings = Math.round(baseSubtotal * discountPercent);
         
-        return { subtotal, savings, total, discountPercent };
+        const total = baseSubtotal - savings + extrasSubtotal;
+        
+        return { baseSubtotal, extrasSubtotal, savings, total, discountPercent };
     };
     
     const updateDisplay = () => {
@@ -263,7 +261,8 @@ const Calculator = (() => {
     return {
         init,
         getBookingSummary,
-        calculate
+        calculate,
+        refresh: updateDisplay
     };
 })();
 

@@ -94,6 +94,11 @@ const translations = {
         "calc.deep": "Deep Clean",
         "calc.move": "Move In/Out",
         "calc.airbnb": "Airbnb",
+        "calc.frequency": "Frequency",
+        "calc.once": "One-Time",
+        "calc.weekly": "Weekly",
+        "calc.biweekly": "Bi-Weekly",
+        "calc.monthly": "Monthly",
         "calc.details": "Home Details",
         "calc.bedrooms": "Bedrooms",
         "calc.bathrooms": "Bathrooms",
@@ -113,6 +118,8 @@ const translations = {
         "calc.extra.garage": "Garage Cleaning",
         "calc.extra.organizing": "Organizing",
         "calc.total": "Your Estimated Price",
+        "calc.savings": "You're saving",
+        "calc.discount.note": "with monthly plan!",
         "calc.note": "Final price confirmed after booking",
         "calc.book": "Book Now",
         
@@ -149,9 +156,12 @@ const translations = {
         "contact.title": "Ready to Transform Your Home?",
         "contact.text": "Have questions? Need a custom quote? We're here to help. Reach out through any channel below.",
         "contact.phone": "Call or Text",
+        "contact.whatsapp": "WhatsApp",
+        "contact.whatsapp.fast": "Quick Response",
         "contact.email": "Email Us",
         "contact.message": "Send Message",
         "contact.follow": "Follow Us",
+        "contact.service": "Service",
         "contact.form.title": "Request a Free Quote",
         "contact.form.notice": "Your info is sent directly to our team via WhatsApp for fastest response.",
         "contact.form.name": "Your Name",
@@ -160,6 +170,7 @@ const translations = {
         "contact.form.address": "Property Address",
         "contact.form.message": "Message",
         "contact.form.submit": "Send Request",
+        "contact.schedule": "Schedule a Call",
         
         // Modal
         "modal.title": "Complete Your Booking",
@@ -311,6 +322,11 @@ const translations = {
         "calc.deep": "Генеральная",
         "calc.move": "Переезд",
         "calc.airbnb": "Airbnb",
+        "calc.frequency": "Частота",
+        "calc.once": "Разово",
+        "calc.weekly": "Еженедельно",
+        "calc.biweekly": "Раз в 2 недели",
+        "calc.monthly": "Ежемесячно",
         "calc.details": "Параметры дома",
         "calc.bedrooms": "Спален",
         "calc.bathrooms": "Ванных",
@@ -330,6 +346,8 @@ const translations = {
         "calc.extra.garage": "Уборка гаража",
         "calc.extra.organizing": "Организация",
         "calc.total": "Примерная стоимость",
+        "calc.savings": "Ваша экономия",
+        "calc.discount.note": "с подпиской",
         "calc.note": "Точная цена после бронирования",
         "calc.book": "Забронировать",
         
@@ -366,9 +384,12 @@ const translations = {
         "contact.title": "Готовы преобразить ваш дом?",
         "contact.text": "Есть вопросы? Нужен индивидуальный расчёт? Мы здесь, чтобы помочь. Свяжитесь с нами любым удобным способом.",
         "contact.phone": "Позвонить",
+        "contact.whatsapp": "WhatsApp",
+        "contact.whatsapp.fast": "Быстрый ответ",
         "contact.email": "Написать Email",
         "contact.message": "Отправить сообщение",
         "contact.follow": "Мы в соцсетях",
+        "contact.service": "Услуга",
         "contact.form.title": "Запросить бесплатный расчёт",
         "contact.form.notice": "Ваши данные отправляются напрямую нашей команде через WhatsApp для быстрого ответа.",
         "contact.form.name": "Ваше имя",
@@ -377,6 +398,7 @@ const translations = {
         "contact.form.address": "Адрес",
         "contact.form.message": "Сообщение",
         "contact.form.submit": "Отправить запрос",
+        "contact.schedule": "Назначить звонок",
         
         // Modal
         "modal.title": "Завершите бронирование",
@@ -528,6 +550,11 @@ const translations = {
         "calc.deep": "Генеральне",
         "calc.move": "Переїзд",
         "calc.airbnb": "Airbnb",
+        "calc.frequency": "Частота",
+        "calc.once": "Разово",
+        "calc.weekly": "Щотижня",
+        "calc.biweekly": "Раз на 2 тижні",
+        "calc.monthly": "Щомісяця",
         "calc.details": "Параметри дому",
         "calc.bedrooms": "Спалень",
         "calc.bathrooms": "Ванних",
@@ -547,6 +574,8 @@ const translations = {
         "calc.extra.garage": "Прибирання гаража",
         "calc.extra.organizing": "Організація",
         "calc.total": "Орієнтовна вартість",
+        "calc.savings": "Ваша економія",
+        "calc.discount.note": "з планом",
         "calc.note": "Точна ціна після бронювання",
         "calc.book": "Забронювати",
         
@@ -583,9 +612,12 @@ const translations = {
         "contact.title": "Готові перетворити ваш дім?",
         "contact.text": "Є питання? Потрібен індивідуальний розрахунок? Ми тут, щоб допомогти. Зв'яжіться з нами будь-яким зручним способом.",
         "contact.phone": "Зателефонувати",
+        "contact.whatsapp": "WhatsApp",
+        "contact.whatsapp.fast": "Швидка відповідь",
         "contact.email": "Написати Email",
         "contact.message": "Надіслати повідомлення",
         "contact.follow": "Ми в соцмережах",
+        "contact.service": "Послуга",
         "contact.form.title": "Запросити безкоштовний розрахунок",
         "contact.form.notice": "Ваші дані надсилаються напряму нашій команді через WhatsApp для швидкої відповіді.",
         "contact.form.name": "Ваше ім'я",
@@ -594,6 +626,7 @@ const translations = {
         "contact.form.address": "Адреса",
         "contact.form.message": "Повідомлення",
         "contact.form.submit": "Надіслати запит",
+        "contact.schedule": "Запланувати дзвінок",
         
         // Modal
         "modal.title": "Завершіть бронювання",
@@ -745,6 +778,11 @@ const translations = {
         "calc.deep": "Profunda",
         "calc.move": "Mudanza",
         "calc.airbnb": "Airbnb",
+        "calc.frequency": "Frecuencia",
+        "calc.once": "Una vez",
+        "calc.weekly": "Semanal",
+        "calc.biweekly": "Cada 2 semanas",
+        "calc.monthly": "Mensual",
         "calc.details": "Detalles del hogar",
         "calc.bedrooms": "Habitaciones",
         "calc.bathrooms": "Baños",
@@ -764,6 +802,8 @@ const translations = {
         "calc.extra.garage": "Limpieza garaje",
         "calc.extra.organizing": "Organización",
         "calc.total": "Precio estimado",
+        "calc.savings": "Ahorro",
+        "calc.discount.note": "con plan recurrente",
         "calc.note": "Precio final confirmado después de reservar",
         "calc.book": "Reservar Ahora",
         
@@ -800,9 +840,12 @@ const translations = {
         "contact.title": "¿Listo para transformar tu hogar?",
         "contact.text": "¿Tienes preguntas? ¿Necesitas una cotización personalizada? Estamos aquí para ayudar. Contáctanos por cualquier canal.",
         "contact.phone": "Llamar",
+        "contact.whatsapp": "WhatsApp",
+        "contact.whatsapp.fast": "Respuesta rápida",
         "contact.email": "Enviar Email",
         "contact.message": "Enviar mensaje",
         "contact.follow": "Síguenos",
+        "contact.service": "Servicio",
         "contact.form.title": "Solicitar cotización gratis",
         "contact.form.notice": "Tu información se envía directamente a nuestro equipo vía WhatsApp para respuesta más rápida.",
         "contact.form.name": "Tu nombre",
@@ -811,6 +854,7 @@ const translations = {
         "contact.form.address": "Dirección",
         "contact.form.message": "Mensaje",
         "contact.form.submit": "Enviar solicitud",
+        "contact.schedule": "Agendar llamada",
         
         // Modal
         "modal.title": "Completa tu reservación",
@@ -900,10 +944,13 @@ function setLanguage(lang) {
     localStorage.setItem('shvets-lang', lang);
     
     // Recalculate price to update summary
-    if (typeof calculatePrice === 'function') {
-        setTimeout(calculatePrice, 100);
+    if (window.Calculator && typeof window.Calculator.refresh === 'function') {
+        setTimeout(() => window.Calculator.refresh(), 100);
     }
 }
+
+// Alias for legacy calls
+window.applyTranslations = setLanguage;
 
 // Get translation helper
 function t(key, lang) {
